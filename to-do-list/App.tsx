@@ -8,6 +8,9 @@ import {
 import { ThemeProvider } from 'styled-components/native'
 import theme from './src/theme'
 
+import { Home } from './src/screens/Home'
+import { Loading } from './src/components/Loading'
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -16,6 +19,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      {fontsLoaded ? <Home /> : <Loading />}
       <StatusBar style="light" backgroundColor="transparent" translucent />
     </ThemeProvider>
   )
