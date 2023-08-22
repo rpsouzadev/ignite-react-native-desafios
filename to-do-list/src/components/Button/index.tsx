@@ -7,7 +7,7 @@ export function Button({ ...rest }: TouchableOpacityProps) {
   const { COLORS } = useTheme()
 
   return (
-    <S.Container {...rest}>
+    <S.Container activeOpacity={0.6} {...rest}>
       <Feather name="plus-circle" size={16} color={COLORS.GRAY_100} />
     </S.Container>
   )
