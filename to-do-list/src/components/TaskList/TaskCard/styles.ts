@@ -22,7 +22,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.COLORS.GRAY_500};
 `
 export const TaskText = styled.Text<TextProps>`
-  width: 235px;
+  max-width: 280px;
   ${({ theme, type }) => css`
     color: ${type === 'noCHECK'
       ? theme.COLORS.GRAY_100
