@@ -3,6 +3,7 @@ import { Header } from '../../components/Header'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Info } from '../../components/Info'
+import { TaskCard } from '../../components/TaskList/TaskCard'
 
 export function Home() {
   return (
@@ -16,6 +17,8 @@ export function Home() {
         </S.InputContainer>
 
         <Info />
+
+        <TaskCard />
       </S.WrapContent>
     </S.Container>
   )
