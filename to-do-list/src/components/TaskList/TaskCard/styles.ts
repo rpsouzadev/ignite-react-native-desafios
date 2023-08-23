@@ -11,6 +11,7 @@ type TextProps = {
 export const Container = styled.View`
   padding: 12px;
   padding-right: 8px;
+  margin-bottom: 8px;
   min-height: 64px;
   border-radius: 8px;
   align-items: center;
