@@ -1,8 +1,13 @@
+import { TaskProps } from '../../screens/Home'
 import * as S from './styles'
 import { useState } from 'react'
 
-export function TaskCard() {
-  const [isChecked, setIsChecked] = useState(false)
+type TaskCardProps = {
+  data: TaskProps
+}
+
+export function TaskCard({ data }: TaskCardProps) {
+  const [isChecked, setIsChecked] = useState(data.isChecked)
 
   return (
     <S.Container>
@@ -11,7 +16,7 @@ export function TaskCard() {
       </S.checkBox>
 
       <S.TaskText type={isChecked ? 'isCHECK' : 'noCHECK'}>
-        Integer urna interdum massa libero auctor neque turpis turpis semper.
+        {data.text}
       </S.TaskText>
 
       <S.RemoveTask>

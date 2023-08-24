@@ -8,7 +8,7 @@ import { TaskCard } from '../../components/TaskCard'
 import { Alert, FlatList } from 'react-native'
 import { TaskEmpty } from '../../components/TaskEmpty'
 
-type TaskProps = {
+export type TaskProps = {
   id: string
   text: string
   isChecked: boolean
@@ -51,7 +51,7 @@ export function Home() {
         <FlatList
           data={task}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <TaskCard />}
+          renderItem={({ item }) => <TaskCard data={item} />}
           contentContainerStyle={{
             paddingBottom: 100,
           }}
