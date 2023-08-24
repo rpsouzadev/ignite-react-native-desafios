@@ -75,7 +75,7 @@ export function Home() {
           <Button onPress={handleAddNewTask} />
         </S.InputContainer>
 
-        <Info />
+        <Info data={task} />
 
         <FlatList
           data={task}
