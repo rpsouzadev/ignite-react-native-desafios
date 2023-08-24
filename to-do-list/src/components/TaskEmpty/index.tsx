@@ -1,5 +1,5 @@
 import * as S from './styles'
-import Clipboard from '../../../assets/Clipboard.png'
+import Clipboard from '../../assets/Clipboard.png'
 
 export function TaskEmpty() {
   return (

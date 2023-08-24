@@ -6,6 +6,7 @@ type InfoStyleProps = {
 
 export const Container = styled.View`
   margin-top: 32px;
+  margin-bottom: 20px;
   width: 'full';
   flex-direction: row;
   justify-content: space-between;
