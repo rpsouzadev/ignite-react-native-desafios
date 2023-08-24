@@ -1,23 +1,22 @@
 import { TaskProps } from '../../screens/Home'
 import * as S from './styles'
-import { useState } from 'react'
 
 type TaskCardProps = {
   data: TaskProps
+  handleToggleCheck: (id: string, checkbox: S.TeskTextStyleProps) => void
 }
 
-export function TaskCard({ data }: TaskCardProps) {
-  const [isChecked, setIsChecked] = useState(data.isChecked)
-
+export function TaskCard({ data, handleToggleCheck }: TaskCardProps) {
   return (
     <S.Container>
-      <S.checkBox type={isChecked ? 'isCHECK' : 'noCHECK'}>
-        {isChecked && <S.CheckIcon name="check" />}
+      <S.checkBox
+        type={data.isChecked}
+        onPress={() => handleToggleCheck(data.id, data.isChecked)}
+      >
+        {data.isChecked === 'isCHECK' && <S.CheckIcon name="check" />}
       </S.checkBox>
 
-      <S.TaskText type={isChecked ? 'isCHECK' : 'noCHECK'}>
-        {data.text}
-      </S.TaskText>
+      <S.TaskText type={data.isChecked}>{data.text}</S.TaskText>
 
       <S.RemoveTask>
         <S.Trash name="trash-2" />
