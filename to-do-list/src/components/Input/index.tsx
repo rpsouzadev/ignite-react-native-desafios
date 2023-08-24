@@ -20,6 +20,7 @@ export function Input({ ...rest }: InputProps) {
   return (
     <S.InputText
       placeholderTextColor={theme.COLORS.GRAY_300}
+      placeholder="Adicione uma nova tarefa"
       onFocus={handleFocus}
       onBlur={handleBlur}
       type={isFocus ? 'FOCUS' : 'BLUR'}

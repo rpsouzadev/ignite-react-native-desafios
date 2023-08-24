@@ -5,16 +5,36 @@ import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Info } from '../../components/Info'
 import { TaskCard } from '../../components/TaskCard'
-import { FlatList } from 'react-native'
+import { Alert, FlatList } from 'react-native'
 import { TaskEmpty } from '../../components/TaskEmpty'
 
-type TeskProps = {
-  id: Date
-  task: string
+type TaskProps = {
+  id: string
+  text: string
+  isChecked: boolean
 }
 
 export function Home() {
-  const [task, setTask] = useState([])
+  const [newTask, setNewTask] = useState('')
+  const [task, setTask] = useState<TaskProps[]>([])
+
+  function handleAddNewTask() {
+    try {
+      if (!newTask.trim()) {
+        return Alert.alert('Campo em branco.', 'Digite uma nova tarefa.')
+      }
+
+      const newTaskData: TaskProps = {
+        id: Date.now().toString(),
+        text: newTask.trim(),
+        isChecked: false,
+      }
+
+      setTask((oldTasks) => [...oldTasks, newTaskData])
+    } catch (error) {
+      console.log('ERROR => ', error)
+    }
+  }
 
   return (
     <S.Container>
@@ -22,15 +42,15 @@ export function Home() {
 
       <S.WrapContent>
         <S.InputContainer>
-          <Input placeholder="Adicione uma nova tarefa" />
-          <Button />
+          <Input value={newTask} onChangeText={setNewTask} />
+          <Button onPress={handleAddNewTask} />
         </S.InputContainer>
 
         <Info />
 
         <FlatList
           data={task}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => <TaskCard />}
           contentContainerStyle={{
             paddingBottom: 100,
