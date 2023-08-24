@@ -51,6 +51,20 @@ export function Home() {
     }
   }
 
+  function handleRemoveTask(id: string) {
+    Alert.alert('Apagar', 'Desenha realmente apagar a tarefa?', [
+      {
+        text: 'Sim',
+        onPress: () =>
+          setTask((oldTasks) => oldTasks.filter((task) => task.id !== id)),
+      },
+      {
+        text: 'Não',
+        style: 'cancel',
+      },
+    ])
+  }
+
   return (
     <S.Container>
       <Header />
@@ -67,7 +81,11 @@ export function Home() {
           data={task}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <TaskCard data={item} handleToggleCheck={handleToggleCheck} />
+            <TaskCard
+              data={item}
+              toggleCheck={() => handleToggleCheck(item.id, item.isChecked)}
+              onRemove={() => handleRemoveTask(item.id)}
+            />
           )}
           contentContainerStyle={{
             paddingBottom: 100,

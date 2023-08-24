@@ -3,22 +3,20 @@ import * as S from './styles'
 
 type TaskCardProps = {
   data: TaskProps
-  handleToggleCheck: (id: string, checkbox: S.TeskTextStyleProps) => void
+  toggleCheck: () => void
+  onRemove: () => void
 }
 
-export function TaskCard({ data, handleToggleCheck }: TaskCardProps) {
+export function TaskCard({ data, toggleCheck, onRemove }: TaskCardProps) {
   return (
     <S.Container>
-      <S.checkBox
-        type={data.isChecked}
-        onPress={() => handleToggleCheck(data.id, data.isChecked)}
-      >
+      <S.checkBox type={data.isChecked} onPress={toggleCheck}>
         {data.isChecked === 'isCHECK' && <S.CheckIcon name="check" />}
       </S.checkBox>
 
       <S.TaskText type={data.isChecked}>{data.text}</S.TaskText>
 
-      <S.RemoveTask>
+      <S.RemoveTask onPress={onRemove}>
         <S.Trash name="trash-2" />
       </S.RemoveTask>
     </S.Container>
