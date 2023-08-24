@@ -1,11 +1,11 @@
 import * as S from './styles'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Header } from '../../components/Header'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Info } from '../../components/Info'
 import { TaskCard } from '../../components/TaskCard'
-import { Alert, FlatList } from 'react-native'
+import { Alert, FlatList, TextInput } from 'react-native'
 import { TaskEmpty } from '../../components/TaskEmpty'
 import { TeskTextStyleProps } from '../../components/TaskCard/styles'
 
@@ -18,6 +18,8 @@ export type TaskProps = {
 export function Home() {
   const [newTask, setNewTask] = useState('')
   const [task, setTask] = useState<TaskProps[]>([])
+
+  const newTaskInputRef = useRef<TextInput>(null)
 
   function handleAddNewTask() {
     try {
@@ -32,6 +34,8 @@ export function Home() {
       }
 
       setTask((oldTasks) => [...oldTasks, newTaskData])
+      newTaskInputRef.current?.blur()
+      setNewTask('')
     } catch (error) {
       console.log('ADD TASK ERROR => ', error)
     }
@@ -71,7 +75,12 @@ export function Home() {
 
       <S.WrapContent>
         <S.InputContainer>
-          <Input value={newTask} onChangeText={setNewTask} />
+          <Input
+            value={newTask}
+            autoCorrect={false}
+            inputRef={newTaskInputRef}
+            onChangeText={setNewTask}
+          />
           <Button onPress={handleAddNewTask} />
         </S.InputContainer>
 

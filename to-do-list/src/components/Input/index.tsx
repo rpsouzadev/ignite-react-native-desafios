@@ -1,11 +1,13 @@
 import * as S from './styles'
 import { useState } from 'react'
 import { useTheme } from 'styled-components/native'
-import { TextInputProps } from 'react-native'
+import { TextInput, TextInputProps } from 'react-native'
 
-type InputProps = TextInputProps
+type InputProps = TextInputProps & {
+  inputRef?: React.RefObject<TextInput>
+}
 
-export function Input({ ...rest }: InputProps) {
+export function Input({ inputRef, ...rest }: InputProps) {
   const theme = useTheme()
   const [isFocus, setIsFocus] = useState(false)
 
@@ -23,6 +25,7 @@ export function Input({ ...rest }: InputProps) {
       placeholder="Adicione uma nova tarefa"
       onFocus={handleFocus}
       onBlur={handleBlur}
+      ref={inputRef}
       type={isFocus ? 'FOCUS' : 'BLUR'}
       {...rest}
     />
