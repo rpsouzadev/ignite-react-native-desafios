@@ -7,16 +7,17 @@ import {
 import theme from '@theme/index'
 import { ThemeProvider } from 'styled-components/native'
 import { Home } from '@screens/home'
+import { Loading } from '@components/Loading'
 
 export default function App() {
-  const [fonstsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     NunitoSans_400Regular,
     NunitoSans_700Bold,
   })
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      {fontsLoaded ? <Home /> : <Loading />}
       <StatusBar style="dark" translucent backgroundColor="transparent" />
     </ThemeProvider>
   )
