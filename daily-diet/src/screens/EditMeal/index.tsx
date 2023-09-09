@@ -1,10 +1,10 @@
 import { Text } from 'react-native'
 import * as S from './styled'
 
-export function Home() {
+export function EditMeal() {
   return (
-    <S.HomeContainer>
-      <Text>Home</Text>
-    </S.HomeContainer>
+    <S.EditMealContainer>
+      <Text>EditMeal</Text>
+    </S.EditMealContainer>
   )
 }
