@@ -2,7 +2,6 @@ import styled from 'styled-components/native'
 
 export const HomeContainer = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
+  padding: 0 20px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_700};
 `
