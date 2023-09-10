@@ -8,7 +8,7 @@ type InfoProps = TouchableOpacityProps & {
 
 export function Info({ percentage, type = 'PRIMARY', ...rest }: InfoProps) {
   return (
-    <S.InfoContainer type={type} {...rest}>
+    <S.InfoContainer activeOpacity={0.5} type={type} {...rest}>
       <S.TextWrapper>
         <S.TextPercent>{percentage}</S.TextPercent>
 
