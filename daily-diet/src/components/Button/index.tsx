@@ -15,7 +15,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   return (
-    <S.ButtonContainer variant={variant} {...rest}>
+    <S.ButtonContainer activeOpacity={0.5} variant={variant} {...rest}>
       {Icon}
       <S.Title variant={variant}>{title}</S.Title>
     </S.ButtonContainer>

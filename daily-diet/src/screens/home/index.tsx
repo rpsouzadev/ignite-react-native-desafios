@@ -14,6 +14,8 @@ export function Home() {
 
       <Info percentage="90,86%" />
 
+      <S.Title>Refeições</S.Title>
+
       <Button
         title="Nova Refeição"
         Icon={
