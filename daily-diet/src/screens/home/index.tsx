@@ -4,6 +4,7 @@ import { HomeHeader } from '@components/HomeHeader'
 import { Button } from '@components/Button'
 import { Plus } from 'phosphor-react-native'
 import { useTheme } from 'styled-components/native'
+import { MealCard } from '@components/MealCard'
 
 export function Home() {
   const theme = useTheme()
@@ -26,6 +27,12 @@ export function Home() {
           />
         }
       />
+
+      <MealCard />
+      <MealCard />
+      <MealCard />
+      <MealCard />
+      <MealCard />
     </S.HomeContainer>
   )
 }
