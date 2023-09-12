@@ -1,7 +1,6 @@
+import { StatusTypeProps } from '@components/Info/styled'
 import { TouchableOpacity } from 'react-native'
 import styled, { css } from 'styled-components/native'
-
-type StatusTypeProps = 'GOOD' | 'BAD'
 
 type MealCardStyleProps = {
   type: StatusTypeProps

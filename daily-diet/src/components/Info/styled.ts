@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components/native'
 import { ArrowUpRight } from 'phosphor-react-native'
 import { TouchableOpacity } from 'react-native'
 
-export type InfoColorSchemeType = 'PRIMARY' | 'SECONDARY'
+export type StatusTypeProps = 'GOOD' | 'BAD'
 
 type InfoStyledPros = {
-  type: InfoColorSchemeType
+  type: StatusTypeProps
 }
 
 export const InfoContainer = styled(TouchableOpacity)<InfoStyledPros>`
@@ -16,7 +16,7 @@ export const InfoContainer = styled(TouchableOpacity)<InfoStyledPros>`
   margin-top: 40px;
   border-radius: 8px;
   background-color: ${({ theme, type }) =>
-    type === 'PRIMARY' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+    type === 'GOOD' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
 `
 
 export const TextWrapper = styled.View`
@@ -44,6 +44,6 @@ export const TextDescription = styled.Text`
 export const InfoIcon = styled(ArrowUpRight).attrs<InfoStyledPros>(
   ({ theme, type }) => ({
     size: 24,
-    color: type === 'PRIMARY' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
+    color: type === 'GOOD' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
   }),
 )``

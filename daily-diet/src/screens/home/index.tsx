@@ -5,15 +5,21 @@ import { Button } from '@components/Button'
 import { Plus } from 'phosphor-react-native'
 import { useTheme } from 'styled-components/native'
 import { MealCard } from '@components/MealCard'
+import { useNavigation } from '@react-navigation/native'
 
 export function Home() {
   const theme = useTheme()
+  const navigation = useNavigation()
+
+  function handleOpenStatistics() {
+    navigation.navigate('statistics')
+  }
 
   return (
     <S.HomeContainer>
       <HomeHeader />
 
-      <Info percentage="90,86%" />
+      <Info percentage="90,86%" onPress={handleOpenStatistics} />
 
       <S.Title>Refeições</S.Title>
 
