@@ -1,10 +1,10 @@
-import { Text } from 'react-native'
 import * as S from './styled'
+import { StatisticsHeader } from '@components/StatisticsHeader'
 
 export function Statistics() {
   return (
     <S.StatisticsContainer>
-      <Text>Statistics</Text>
+      <StatisticsHeader />
     </S.StatisticsContainer>
   )
 }
