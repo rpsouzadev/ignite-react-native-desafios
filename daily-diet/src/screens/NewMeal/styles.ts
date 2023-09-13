@@ -12,3 +12,6 @@ export const ContentContainer = styled.View`
   border-top-right-radius: 20px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_700};
 `
+export const InputWrapper = styled.View`
+  flex-direction: row;
+`
