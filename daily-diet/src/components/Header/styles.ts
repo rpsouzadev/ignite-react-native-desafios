@@ -10,7 +10,7 @@ export const HeaderContainer = styled.View<HomeStyleProps>`
   flex-direction: row;
   width: 100%;
   height: 130px;
-  padding: 40px 20px;
+  padding: 40px 20px 20px 20px;
   align-items: center;
   justify-content: center;
   ${({ theme, type }) =>

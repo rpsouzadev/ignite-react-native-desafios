@@ -11,7 +11,7 @@ export const StatisticsContainer = styled.View`
 `
 export const ContentContainer = styled.View`
   flex: 1;
-  top: -30px;
+  margin-top: -30px;
   padding: 24px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
