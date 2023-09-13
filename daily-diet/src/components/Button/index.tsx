@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import * as S from './styled'
+import * as S from './styles'
 import { TouchableOpacityProps } from 'react-native'
 
 type ButtonProps = TouchableOpacityProps & {

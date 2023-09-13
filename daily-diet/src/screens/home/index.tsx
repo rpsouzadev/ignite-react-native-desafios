@@ -1,4 +1,4 @@
-import * as S from './styled'
+import * as S from './styles'
 import { Info } from '@components/Info'
 import { HomeHeader } from '@components/HomeHeader'
 import { Button } from '@components/Button'
@@ -13,6 +13,10 @@ export function Home() {
 
   function handleOpenStatistics() {
     navigation.navigate('statistics')
+  }
+
+  function handleOpenNewMeal() {
+    navigation.navigate('new')
   }
 
   return (
@@ -32,6 +36,7 @@ export function Home() {
             style={{ marginRight: 8 }}
           />
         }
+        onPress={handleOpenNewMeal}
       />
 
       <MealCard />

@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import * as S from './styled'
+import * as S from './styles'
 import { TouchableOpacity } from 'react-native'
 
 export function StatisticsHeader() {

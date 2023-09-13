@@ -1,4 +1,4 @@
-import * as S from './styled'
+import * as S from './styles'
 
 export function MealCard() {
   return (
