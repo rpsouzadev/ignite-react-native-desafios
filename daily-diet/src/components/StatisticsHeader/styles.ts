@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native'
 import { ArrowLeft } from 'phosphor-react-native'
-import { StatusTypeProps } from '@components/Info/styled'
+import { StatusTypeProps } from '@components/Info/styles'
 
 type StatisticsHeaderStylePros = {
   type: StatusTypeProps

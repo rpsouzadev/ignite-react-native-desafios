@@ -1,4 +1,4 @@
-import { StatusTypeProps } from '@components/Info/styled'
+import { StatusTypeProps } from '@components/Info/styles'
 import { TouchableOpacity } from 'react-native'
 import styled, { css } from 'styled-components/native'
 
