@@ -52,7 +52,7 @@ export const Box = styled.View`
   background-color: ${({ theme }) => theme.COLORS.GRAY_600};
 `
 export const BoxSmall = styled.View<StatisticsStyleProps>`
-  width: 168px;
+  flex: 1;
   padding: 16px;
   border-radius: 8px;
   align-items: center;
@@ -63,5 +63,5 @@ export const BoxSmall = styled.View<StatisticsStyleProps>`
 export const BoxWrapper = styled.View`
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
 `
