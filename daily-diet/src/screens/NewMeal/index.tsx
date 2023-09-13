@@ -1,10 +1,10 @@
-import { Text } from 'react-native'
 import * as S from './styles'
+import { Header } from '@components/Header'
 
 export function NewMeal() {
   return (
     <S.NewMealContainer>
-      <Text>NewMeal</Text>
+      <Header title="Nova refeição" />
     </S.NewMealContainer>
   )
 }

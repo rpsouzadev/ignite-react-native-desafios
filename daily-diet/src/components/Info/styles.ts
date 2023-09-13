@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components/native'
 import { ArrowUpRight } from 'phosphor-react-native'
 import { TouchableOpacity } from 'react-native'
 
-export type StatusTypeProps = 'GOOD' | 'BAD'
+export type StatusTypeProps = 'GOOD' | 'BAD' | 'default'
 
 type InfoStyledPros = {
   type: StatusTypeProps

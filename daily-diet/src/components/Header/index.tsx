@@ -1,11 +1,17 @@
+import { StatusTypeProps } from '@components/Info/styles'
 import * as S from './styles'
 
-export function Header() {
+type HeaderProps = {
+  title: string
+  colorScheme?: StatusTypeProps
+}
+
+export function Header({ title, colorScheme = 'default' }: HeaderProps) {
   return (
-    <S.HeaderContainer>
+    <S.HeaderContainer type={colorScheme}>
       <S.HeaderIcon />
 
-      <S.Title>Nova refeição</S.Title>
+      <S.Title>{title}</S.Title>
     </S.HeaderContainer>
   )
 }
