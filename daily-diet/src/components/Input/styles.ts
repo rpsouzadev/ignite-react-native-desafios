@@ -1,17 +1,28 @@
 import { TextInput } from 'react-native'
 import styled, { css } from 'styled-components/native'
 
+type InputContainerStyleProps = {
+  flexNumber: number | undefined
+}
 type InputStyleProps = {
   focus: 'isFOCUS' | 'isBLUR'
   size: number
 }
+export const InputContainer = styled.View<InputContainerStyleProps>`
+  margin: 10px 0px;
+  ${({ flexNumber }) =>
+    flexNumber &&
+    css`
+      flex: ${flexNumber};
+    `}
+`
 export const Label = styled.Text`
-  margin-bottom: 4px;
+  margin: 4px;
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_200};
     font-size: ${theme.FONT_SIZE.MD}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
-  `}
+  `};
 `
 export const InputText = styled(TextInput)<InputStyleProps>`
   ${({ theme, focus, size }) => css`
@@ -25,9 +36,7 @@ export const InputText = styled(TextInput)<InputStyleProps>`
     min-height: ${size}px;
     max-height: ${size}px;
   `};
-  flex: 1;
   padding: 8px 16px;
   border-width: 1px;
   border-radius: 6px;
-  margin-bottom: 20px;
 `

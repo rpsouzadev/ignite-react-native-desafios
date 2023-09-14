@@ -14,4 +14,5 @@ export const ContentContainer = styled.View`
 `
 export const InputWrapper = styled.View`
   flex-direction: row;
+  gap: 20px;
 `

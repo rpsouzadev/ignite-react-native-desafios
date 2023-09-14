@@ -5,9 +5,10 @@ import { TextInputProps } from 'react-native'
 type InputProps = TextInputProps & {
   title: string
   size: number
+  flexNumber?: number
 }
 
-export function Input({ title, size, ...rest }: InputProps) {
+export function Input({ title, size, flexNumber, ...rest }: InputProps) {
   const [isFocus, setIsFocus] = useState(false)
 
   function handleFocus() {
@@ -19,7 +20,7 @@ export function Input({ title, size, ...rest }: InputProps) {
   }
 
   return (
-    <>
+    <S.InputContainer flexNumber={flexNumber}>
       <S.Label>{title}</S.Label>
       <S.InputText
         size={size}
@@ -28,6 +29,6 @@ export function Input({ title, size, ...rest }: InputProps) {
         focus={isFocus ? 'isFOCUS' : 'isBLUR'}
         {...rest}
       />
-    </>
+    </S.InputContainer>
   )
 }
