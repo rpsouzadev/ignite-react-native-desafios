@@ -1,6 +1,6 @@
 import * as S from './styles'
 import { useState } from 'react'
-import { TextInputProps } from 'react-native'
+import { TextInput, TextInputProps } from 'react-native'
 
 type InputProps = TextInputProps & {
   title: string
@@ -9,12 +9,14 @@ type InputProps = TextInputProps & {
   errorMessage?: string | null
   openDatePicker?: () => void
   openTimePicker?: () => void
+  inputRef?: React.RefObject<TextInput>
 }
 
 export function Input({
   title,
   size,
   flexNumber,
+  inputRef,
   errorMessage = null,
   openDatePicker,
   openTimePicker,
@@ -43,6 +45,7 @@ export function Input({
         size={size}
         onBlur={handleBlur}
         onFocus={handleFocus}
+        ref={inputRef}
         focus={isFocus ? 'isFOCUS' : 'isBLUR'}
         {...rest}
       />

@@ -1,5 +1,6 @@
 import * as S from './styles'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { TextInput } from 'react-native'
 import { Input } from '@components/Input'
 import { Header } from '@components/Header'
 import { Button } from '@components/Button'
@@ -25,6 +26,9 @@ const newMealSchema = yup.object({
 export function NewMeal() {
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [showTimePicker, setShowTimePicker] = useState(false)
+
+  const dateInputRef = useRef<TextInput>(null)
+  const timeInputRef = useRef<TextInput>(null)
 
   const {
     control,
@@ -95,6 +99,7 @@ export function NewMeal() {
                 value={value}
                 flexNumber={1}
                 onChangeText={onChange}
+                inputRef={dateInputRef}
                 openDatePicker={toggleDatePicker}
                 errorMessage={errors.date?.message}
               />
@@ -110,6 +115,7 @@ export function NewMeal() {
                 value={value}
                 flexNumber={1}
                 onChangeText={onChange}
+                inputRef={timeInputRef}
                 openTimePicker={toggleTimePicker}
                 errorMessage={errors.time?.message}
               />
@@ -127,6 +133,7 @@ export function NewMeal() {
               if (selectedDate) {
                 const formattedDate = selectedDate.toLocaleDateString('pt-BR')
                 setValue('date', formattedDate)
+                dateInputRef.current?.blur()
                 toggleDatePicker()
               }
             }}
@@ -146,6 +153,7 @@ export function NewMeal() {
                   minute: '2-digit',
                 })
                 setValue('time', formattedTime)
+                timeInputRef.current?.blur()
                 toggleTimePicker()
               }
             }}
