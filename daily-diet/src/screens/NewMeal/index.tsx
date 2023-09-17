@@ -11,26 +11,25 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 type FormDataProps = {
   name: string
   description: string
-  date: Date
-  time: Date
+  date: string
+  time: string
 }
 
 const newMealSchema = yup.object({
   name: yup.string().required('Nome obrigatório'),
   description: yup.string().required('Descrição obrigatória'),
-  date: yup.date().required('Data obrigatória'),
-  time: yup.date().required('Hora obrigatória'),
+  date: yup.string().required('Data obrigatória'),
+  time: yup.string().required('Hora obrigatória'),
 })
 
 export function NewMeal() {
-  const [selectDate, setSelectDate] = useState<Date>()
-  const [selectTime, setSelectTime] = useState<Date>()
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [showTimePicker, setShowTimePicker] = useState(false)
 
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormDataProps>({
     resolver: yupResolver(newMealSchema),
@@ -44,6 +43,14 @@ export function NewMeal() {
     }
   }
 
+  const toggleDatePicker = () => {
+    setShowDatePicker(!showDatePicker)
+  }
+
+  const toggleTimePicker = () => {
+    setShowTimePicker(!showTimePicker)
+  }
+
   return (
     <S.NewMealContainer>
       <Header title="Nova refeição" />
@@ -52,10 +59,11 @@ export function NewMeal() {
         <Controller
           control={control}
           name="name"
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               title="Nome"
               size={48}
+              value={value}
               onChangeText={onChange}
               errorMessage={errors.name?.message}
             />
@@ -64,10 +72,11 @@ export function NewMeal() {
         <Controller
           control={control}
           name="description"
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input
               title="Descrição"
               size={120}
+              value={value}
               textAlignVertical="top"
               onChangeText={onChange}
               errorMessage={errors.description?.message}
@@ -79,14 +88,14 @@ export function NewMeal() {
           <Controller
             control={control}
             name="date"
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Input
                 title="Data"
                 size={48}
+                value={value}
                 flexNumber={1}
-                openDatePicker={() => setShowDatePicker(true)}
-                value={selectDate ? selectDate.toDateString() : ''}
                 onChangeText={onChange}
+                openDatePicker={toggleDatePicker}
                 errorMessage={errors.date?.message}
               />
             )}
@@ -94,14 +103,14 @@ export function NewMeal() {
           <Controller
             control={control}
             name="time"
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Input
                 title="Hora"
                 size={48}
+                value={value}
                 flexNumber={1}
-                openTimePicker={() => setShowTimePicker(true)}
-                value={selectTime ? selectTime.toLocaleTimeString() : ''}
                 onChangeText={onChange}
+                openTimePicker={toggleTimePicker}
                 errorMessage={errors.time?.message}
               />
             )}
@@ -116,8 +125,8 @@ export function NewMeal() {
             display="default"
             onChange={(event, selectedDate) => {
               if (selectedDate) {
-                setSelectDate(selectedDate)
-                setShowDatePicker(false)
+                setValue('date', selectedDate.toDateString())
+                toggleDatePicker()
               }
             }}
           />
@@ -131,8 +140,8 @@ export function NewMeal() {
             display="default"
             onChange={(event, selectedTime) => {
               if (selectedTime) {
-                setSelectTime(selectedTime)
-                setShowTimePicker(false)
+                setValue('time', selectedTime.toLocaleTimeString())
+                toggleTimePicker()
               }
             }}
           />
