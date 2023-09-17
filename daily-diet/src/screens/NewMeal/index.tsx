@@ -125,7 +125,8 @@ export function NewMeal() {
             display="default"
             onChange={(event, selectedDate) => {
               if (selectedDate) {
-                setValue('date', selectedDate.toDateString())
+                const formattedDate = selectedDate.toLocaleDateString('pt-BR')
+                setValue('date', formattedDate)
                 toggleDatePicker()
               }
             }}
@@ -140,7 +141,11 @@ export function NewMeal() {
             display="default"
             onChange={(event, selectedTime) => {
               if (selectedTime) {
-                setValue('time', selectedTime.toLocaleTimeString())
+                const formattedTime = selectedTime.toLocaleTimeString('pt-BR', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })
+                setValue('time', formattedTime)
                 toggleTimePicker()
               }
             }}
