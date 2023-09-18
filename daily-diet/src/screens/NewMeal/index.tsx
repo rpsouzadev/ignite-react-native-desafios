@@ -12,9 +12,10 @@ import * as yup from 'yup'
 
 type FormDataProps = {
   name: string
-  description: string
   date: string
   time: string
+  description: string
+  isWithinDiet: boolean
 }
 
 const newMealSchema = yup.object({
@@ -22,6 +23,7 @@ const newMealSchema = yup.object({
   description: yup.string().required('Descrição obrigatória'),
   date: yup.string().required('Data obrigatória'),
   time: yup.string().required('Hora obrigatória'),
+  isWithinDiet: yup.boolean().required('Selecione o status da dieta'),
 })
 
 export function NewMeal() {
@@ -40,14 +42,6 @@ export function NewMeal() {
     resolver: yupResolver(newMealSchema),
   })
 
-  function handleAddNewMeal(data: FormDataProps) {
-    if (data) {
-      console.log('data => ', data)
-    } else {
-      console.log('error => ', errors)
-    }
-  }
-
   const toggleDatePicker = () => {
     setShowDatePicker(!showDatePicker)
   }
@@ -56,11 +50,22 @@ export function NewMeal() {
     setShowTimePicker(!showTimePicker)
   }
 
+  function handleAddNewMeal(data: FormDataProps) {
+    if (data) {
+      console.log('data => ', data)
+    } else {
+      console.log('error => ', errors)
+    }
+  }
+
   return (
     <S.NewMealContainer>
       <Header title="Nova refeição" />
 
-      <S.ContentContainer>
+      <S.ContentContainer
+        contentContainerStyle={{ flexGrow: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
         <Controller
           control={control}
           name="name"
@@ -161,11 +166,34 @@ export function NewMeal() {
           />
         )}
 
-        <S.Label>Está dentro da dieta?</S.Label>
-        <S.InOrOutWrapper>
-          <ButtonInOrOut title="Sim" status="primary" />
-          <ButtonInOrOut title="Não" status="secondary" />
-        </S.InOrOutWrapper>
+        <S.InOrOutContainer>
+          <S.Label>Está dentro da dieta?</S.Label>
+          <Controller
+            control={control}
+            name="isWithinDiet"
+            render={({ field: { onChange, value } }) => (
+              <S.InOrOutWrapper>
+                <ButtonInOrOut
+                  title="Sim"
+                  status="primary"
+                  type={value === true ? 'GOOD' : 'default'}
+                  onPress={() => {
+                    onChange(true)
+                  }}
+                />
+                <ButtonInOrOut
+                  title="Não"
+                  status="secondary"
+                  type={value === false ? 'BAD' : 'default'}
+                  onPress={() => {
+                    onChange(false)
+                  }}
+                />
+              </S.InOrOutWrapper>
+            )}
+          />
+          <S.ErrorMessage>{errors.isWithinDiet?.message}</S.ErrorMessage>
+        </S.InOrOutContainer>
 
         <Button
           title="Cadastrar refeição"
