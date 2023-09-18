@@ -49,7 +49,7 @@ export function Input({
         focus={isFocus ? 'isFOCUS' : 'isBLUR'}
         {...rest}
       />
-      {errorMessage && <S.Label>{errorMessage}</S.Label>}
+      {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </S.InputContainer>
   )
 }

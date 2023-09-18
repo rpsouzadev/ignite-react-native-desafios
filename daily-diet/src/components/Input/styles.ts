@@ -17,11 +17,19 @@ export const InputContainer = styled.View<InputContainerStyleProps>`
     `}
 `
 export const Label = styled.Text`
-  margin: 4px;
+  margin-bottom: 4px;
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_200};
     font-size: ${theme.FONT_SIZE.MD}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
+  `};
+`
+export const ErrorMessage = styled.Text`
+  margin-top: 4px;
+  ${({ theme }) => css`
+    color: ${theme.COLORS.RED_DARK};
+    font-size: ${theme.FONT_SIZE.MD}px;
+    font-family: ${theme.FONT_FAMILY.REGULAR};
   `};
 `
 export const InputText = styled(TextInput)<InputStyleProps>`
