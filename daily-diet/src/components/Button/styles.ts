@@ -1,4 +1,3 @@
-import theme from '@theme/index'
 import { TouchableOpacity } from 'react-native'
 import styled, { css } from 'styled-components/native'
 

@@ -6,8 +6,9 @@ import { Header } from '@components/Header'
 import { Button } from '@components/Button'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import { ButtonInOrOut } from '@components/ButtonInOrOut'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import * as yup from 'yup'
 
 type FormDataProps = {
   name: string
@@ -159,6 +160,12 @@ export function NewMeal() {
             }}
           />
         )}
+
+        <S.Label>Está dentro da dieta?</S.Label>
+        <S.InOrOutWrapper>
+          <ButtonInOrOut title="Sim" status="primary" />
+          <ButtonInOrOut title="Não" status="secondary" />
+        </S.InOrOutWrapper>
 
         <Button
           title="Cadastrar refeição"
