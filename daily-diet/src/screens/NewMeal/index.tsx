@@ -6,6 +6,7 @@ import { Header } from '@components/Header'
 import { Button } from '@components/Button'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigation } from '@react-navigation/native'
 import { ButtonInOrOut } from '@components/ButtonInOrOut'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import * as yup from 'yup'
@@ -33,6 +34,8 @@ export function NewMeal() {
   const dateInputRef = useRef<TextInput>(null)
   const timeInputRef = useRef<TextInput>(null)
 
+  const navigation = useNavigation()
+
   const {
     control,
     handleSubmit,
@@ -51,11 +54,7 @@ export function NewMeal() {
   }
 
   function handleAddNewMeal(data: FormDataProps) {
-    if (data) {
-      console.log('data => ', data)
-    } else {
-      console.log('error => ', errors)
-    }
+    navigation.navigate('feedback')
   }
 
   return (

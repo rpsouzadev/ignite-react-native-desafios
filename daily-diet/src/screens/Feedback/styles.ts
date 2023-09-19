@@ -6,3 +6,6 @@ export const FeedbackContainer = styled.View`
   align-items: center;
   background-color: ${({ theme }) => theme.COLORS.GRAY_700};
 `
+export const ButtonWrapper = styled.View`
+  width: 190px;
+`
