@@ -1,8 +1,9 @@
 import * as S from './styles'
+import { TouchableOpacityProps } from 'react-native'
 
-export function MealCard() {
+export function MealCard({ ...rest }: TouchableOpacityProps) {
   return (
-    <S.MealCardContainer>
+    <S.MealCardContainer {...rest}>
       <S.TextHour>20:00</S.TextHour>
 
       <S.Divider />

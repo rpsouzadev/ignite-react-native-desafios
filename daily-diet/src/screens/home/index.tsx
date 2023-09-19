@@ -19,6 +19,10 @@ export function Home() {
     navigation.navigate('new')
   }
 
+  function handleOpenMeal() {
+    navigation.navigate('meal')
+  }
+
   return (
     <S.HomeContainer>
       <HomeHeader />
@@ -39,11 +43,7 @@ export function Home() {
         onPress={handleOpenNewMeal}
       />
 
-      <MealCard />
-      <MealCard />
-      <MealCard />
-      <MealCard />
-      <MealCard />
+      <MealCard onPress={handleOpenMeal} />
     </S.HomeContainer>
   )
 }

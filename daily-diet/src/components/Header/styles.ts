@@ -12,7 +12,6 @@ export const HeaderContainer = styled.View<HomeStyleProps>`
   height: 130px;
   padding: 40px 20px 20px 20px;
   align-items: center;
-  justify-content: center;
   ${({ theme, type }) =>
     type === 'GOOD'
       ? css`
@@ -27,8 +26,7 @@ export const HeaderContainer = styled.View<HomeStyleProps>`
         `};
 `
 export const Title = styled.Text`
-  flex: 1;
-  text-align: center;
+  margin: 0 auto;
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_100};
     font-size: ${theme.FONT_SIZE.XL}px;
