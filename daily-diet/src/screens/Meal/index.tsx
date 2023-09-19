@@ -3,9 +3,15 @@ import { Button } from '@components/Button'
 import { Header } from '@components/Header'
 import { useTheme } from 'styled-components/native'
 import { PencilSimpleLine, Trash } from 'phosphor-react-native'
+import { useNavigation } from '@react-navigation/native'
 
 export function Meal() {
   const theme = useTheme()
+  const navigation = useNavigation()
+
+  function handleOpenEditMeal() {
+    navigation.navigate('edit')
+  }
 
   return (
     <S.MealContainer>
@@ -31,6 +37,7 @@ export function Meal() {
         <S.ButtonsWrapper>
           <Button
             title="Editar refeição"
+            onPress={handleOpenEditMeal}
             Icon={
               <PencilSimpleLine
                 color={theme.COLORS.WHITE}
