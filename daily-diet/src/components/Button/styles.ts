@@ -9,7 +9,9 @@ type ButtonStyleProps = {
 
 export const ButtonContainer = styled(TouchableOpacity)<ButtonStyleProps>`
   flex-direction: row;
-  height: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  flex: 1;
   align-items: center;
   justify-content: center;
   border-radius: 6px;

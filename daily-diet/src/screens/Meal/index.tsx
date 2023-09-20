@@ -4,13 +4,20 @@ import { Header } from '@components/Header'
 import { useTheme } from 'styled-components/native'
 import { PencilSimpleLine, Trash } from 'phosphor-react-native'
 import { useNavigation } from '@react-navigation/native'
+import { AlertModal } from '@components/AlertModal'
+import { useState } from 'react'
 
 export function Meal() {
+  const [showAlertModal, setShowAlertModal] = useState(false)
   const theme = useTheme()
   const navigation = useNavigation()
 
   function handleOpenEditMeal() {
     navigation.navigate('edit')
+  }
+
+  function handleDeleteMeal() {
+    setShowAlertModal(true)
   }
 
   return (
@@ -50,6 +57,7 @@ export function Meal() {
           <Button
             title="Editar refeição"
             variant="OUTLINE"
+            onPress={handleDeleteMeal}
             Icon={
               <Trash
                 color={theme.COLORS.GRAY_100}
@@ -60,6 +68,8 @@ export function Meal() {
           />
         </S.ButtonsWrapper>
       </S.ContentContainer>
+
+      {showAlertModal && <AlertModal />}
     </S.MealContainer>
   )
 }
