@@ -16,8 +16,11 @@ export function Meal() {
     navigation.navigate('edit')
   }
 
+  function handleToggleModal() {
+    setShowAlertModal(!showAlertModal)
+  }
   function handleDeleteMeal() {
-    setShowAlertModal(true)
+    console.log('delete')
   }
 
   return (
@@ -57,7 +60,7 @@ export function Meal() {
           <Button
             title="Editar refeição"
             variant="OUTLINE"
-            onPress={handleDeleteMeal}
+            onPress={handleToggleModal}
             Icon={
               <Trash
                 color={theme.COLORS.GRAY_100}
@@ -69,7 +72,13 @@ export function Meal() {
         </S.ButtonsWrapper>
       </S.ContentContainer>
 
-      {showAlertModal && <AlertModal />}
+      {showAlertModal && (
+        <AlertModal
+          visible={showAlertModal}
+          onCancel={handleToggleModal}
+          onConfirm={handleDeleteMeal}
+        />
+      )}
     </S.MealContainer>
   )
 }
