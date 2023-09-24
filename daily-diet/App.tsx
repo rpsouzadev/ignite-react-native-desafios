@@ -8,6 +8,7 @@ import theme from '@theme/index'
 import { ThemeProvider } from 'styled-components/native'
 import { Loading } from '@components/Loading'
 import { Routes } from '@routes/index'
+import { MealContextProvider } from '@contexts/MealContext'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,7 +18,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoaded ? <Routes /> : <Loading />}
+      <MealContextProvider>
+        {fontsLoaded ? <Routes /> : <Loading />}
+      </MealContextProvider>
       <StatusBar style="dark" translucent backgroundColor="transparent" />
     </ThemeProvider>
   )

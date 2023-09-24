@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native'
 import { ButtonInOrOut } from '@components/ButtonInOrOut'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import * as yup from 'yup'
+import { useMeal } from '@hooks/useMeal'
 
 type FormDataProps = {
   name: string
@@ -35,6 +36,7 @@ export function NewMeal() {
   const timeInputRef = useRef<TextInput>(null)
 
   const navigation = useNavigation()
+  const { saveMeal } = useMeal()
 
   const {
     control,
@@ -54,7 +56,8 @@ export function NewMeal() {
   }
 
   function handleAddNewMeal(data: FormDataProps) {
-    navigation.navigate('feedback')
+    // navigation.navigate('feedback')
+    saveMeal(data)
   }
 
   return (
