@@ -6,10 +6,13 @@ import { Plus } from 'phosphor-react-native'
 import { useTheme } from 'styled-components/native'
 import { MealCard } from '@components/MealCard'
 import { useNavigation } from '@react-navigation/native'
+import { useMeal } from '@hooks/useMeal'
+import { SectionList } from 'react-native'
 
 export function Home() {
   const theme = useTheme()
   const navigation = useNavigation()
+  const { meal } = useMeal()
 
   function handleOpenStatistics() {
     navigation.navigate('statistics')
@@ -43,7 +46,14 @@ export function Home() {
         onPress={handleOpenNewMeal}
       />
 
-      <MealCard onPress={handleOpenMeal} />
+      <SectionList
+        sections={meal}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <MealCard onPress={handleOpenMeal} />}
+        renderSectionHeader={({ section }) => (
+          <S.Title>{section.title}</S.Title>
+        )}
+      />
     </S.HomeContainer>
   )
 }

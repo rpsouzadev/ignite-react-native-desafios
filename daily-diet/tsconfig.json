@@ -28,6 +28,9 @@
       "@hooks/*": [
         "./src/hooks/*"
       ],
+      "@dtos/*": [
+        "src/dtos/*"
+      ],
       "@contexts/*": [
         "./src/contexts/*"
       ]

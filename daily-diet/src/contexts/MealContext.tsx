@@ -1,12 +1,14 @@
 import { ReactNode, createContext, useState } from 'react'
-import { MealDTO } from 'src/dtos/MealDTO'
+import { MealByDayDTO } from '@dtos/MealByDayDTO'
+import { MealDTO } from '@dtos/MealDTO'
 
 type MealContextProviderProps = {
   children: ReactNode
 }
 
 type MealContextDataProps = {
-  saveMeal: ({ name, description, date, time, isWithinDiet }: MealDTO) => void
+  meal: MealByDayDTO[]
+  saveMeal: (mealData: MealDTO) => void
 }
 
 export const MealContext = createContext<MealContextDataProps>(
@@ -14,22 +16,20 @@ export const MealContext = createContext<MealContextDataProps>(
 )
 
 export function MealContextProvider({ children }: MealContextProviderProps) {
-  const [meal, setMeal] = useState<MealDTO>()
+  const [meal, setMeal] = useState<MealByDayDTO[]>([])
 
-  function saveMeal({ name, description, date, time, isWithinDiet }: MealDTO) {
-    const data = {
-      name,
-      description,
-      date,
-      time,
-      isWithinDiet,
+  function saveMeal(mealData: MealDTO) {
+    const mealDataWithTitle = {
+      title: mealData.date,
+      data: [mealData],
     }
 
-    console.log(data)
-    setMeal(data)
+    setMeal((prev) => [...prev, mealDataWithTitle])
   }
 
   return (
-    <MealContext.Provider value={{ saveMeal }}>{children}</MealContext.Provider>
+    <MealContext.Provider value={{ meal, saveMeal }}>
+      {children}
+    </MealContext.Provider>
   )
 }

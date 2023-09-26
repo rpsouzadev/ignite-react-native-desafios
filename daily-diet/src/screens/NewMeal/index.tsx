@@ -57,7 +57,11 @@ export function NewMeal() {
 
   function handleAddNewMeal(data: FormDataProps) {
     // navigation.navigate('feedback')
-    saveMeal(data)
+    const mealData = {
+      ...data,
+      id: Date.now().toString(),
+    }
+    saveMeal(mealData)
   }
 
   return (
