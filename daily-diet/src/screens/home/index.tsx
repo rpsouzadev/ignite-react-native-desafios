@@ -49,7 +49,9 @@ export function Home() {
       <SectionList
         sections={meal}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <MealCard onPress={handleOpenMeal} />}
+        renderItem={({ item }) => (
+          <MealCard data={item} onPress={handleOpenMeal} />
+        )}
         renderSectionHeader={({ section }) => (
           <S.Title>{section.title}</S.Title>
         )}
