@@ -1,13 +1,12 @@
 import * as S from './styles'
 import { Info } from '@components/Info'
-import { HomeHeader } from '@components/HomeHeader'
+import { useMeal } from '@hooks/useMeal'
 import { Button } from '@components/Button'
 import { Plus } from 'phosphor-react-native'
+import { HomeHeader } from '@components/HomeHeader'
 import { useTheme } from 'styled-components/native'
-import { MealCard } from '@components/MealCard'
 import { useNavigation } from '@react-navigation/native'
-import { useMeal } from '@hooks/useMeal'
-import { SectionList } from 'react-native'
+import { SectionMealList } from '@components/SectionMealList'
 
 export function Home() {
   const theme = useTheme()
@@ -20,10 +19,6 @@ export function Home() {
 
   function handleOpenNewMeal() {
     navigation.navigate('new')
-  }
-
-  function handleOpenMeal() {
-    navigation.navigate('meal')
   }
 
   return (
@@ -46,16 +41,7 @@ export function Home() {
         onPress={handleOpenNewMeal}
       />
 
-      <SectionList
-        sections={meal}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <MealCard data={item} onPress={handleOpenMeal} />
-        )}
-        renderSectionHeader={({ section }) => (
-          <S.Title>{section.title}</S.Title>
-        )}
-      />
+      <SectionMealList />
     </S.HomeContainer>
   )
 }
