@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { ReactNode, createContext, useState } from 'react'
 import { MealByDayDTO } from '@dtos/MealByDayDTO'
 import { MealDTO } from '@dtos/MealDTO'
@@ -19,12 +20,23 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
   const [meal, setMeal] = useState<MealByDayDTO[]>([])
 
   function saveMeal(mealData: MealDTO) {
-    const mealDataWithTitle = {
-      title: mealData.date,
-      data: [mealData],
-    }
+    try {
+      const findMealByDay = meal.find((meal) => meal.title === mealData.date)
 
-    setMeal((prev) => [...prev, mealDataWithTitle])
+      if (findMealByDay) {
+        findMealByDay.data.push(mealData)
+        setMeal([...meal])
+      } else {
+        const mealByDay = {
+          title: mealData.date,
+          data: [mealData],
+        }
+
+        setMeal((prev) => [...prev, mealByDay])
+      }
+    } catch (error) {
+      throw error
+    }
   }
 
   return (
