@@ -5,7 +5,7 @@ export declare global {
       home: undefined
       meal: undefined
       edit: undefined
-      feedback: undefined
+      feedback: { status: boolean }
       statistics: undefined
     }
   }

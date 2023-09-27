@@ -56,12 +56,18 @@ export function NewMeal() {
   }
 
   function handleAddNewMeal(data: FormDataProps) {
-    // navigation.navigate('feedback')
-    const mealData = {
-      ...data,
-      id: Date.now().toString(),
+    try {
+      const mealData = {
+        ...data,
+        id: Date.now().toString(),
+      }
+
+      saveMeal(mealData)
+
+      navigation.navigate('feedback', { status: data.isWithinDiet })
+    } catch (error) {
+      console.log('Handle add new meal => ', error)
     }
-    saveMeal(mealData)
   }
 
   return (
