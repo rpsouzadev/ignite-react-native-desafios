@@ -30,6 +30,10 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
 
         if (findMealByDay) {
           findMealByDay.data.push(mealData)
+
+          findMealByDay.data.sort((a, b) => {
+            return b.time.localeCompare(a.time)
+          })
         } else {
           const mealByDay = {
             title: mealData.date,
@@ -39,9 +43,7 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
         }
 
         return newMeal.sort((a, b) => {
-          const dateA = new Date(a.title.split('/').reverse().join('-'))
-          const dateB = new Date(b.title.split('/').reverse().join('-'))
-          return dateB.getTime() - dateA.getTime()
+          return b.title.localeCompare(a.title)
         })
       })
     } catch (error) {
