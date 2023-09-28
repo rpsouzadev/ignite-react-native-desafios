@@ -1,16 +1,41 @@
 import * as S from './styles'
+import { useEffect, useState } from 'react'
+import { useMeal } from '@hooks/useMeal'
 import { Button } from '@components/Button'
 import { Header } from '@components/Header'
 import { useTheme } from 'styled-components/native'
-import { PencilSimpleLine, Trash } from 'phosphor-react-native'
-import { useNavigation } from '@react-navigation/native'
 import { AlertModal } from '@components/AlertModal'
-import { useState } from 'react'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { PencilSimpleLine, Trash } from 'phosphor-react-native'
+import { MealDTO } from '@dtos/MealDTO'
+
+type RouteParams = {
+  mealId: string
+}
 
 export function Meal() {
+  const [mealById, setMealById] = useState<MealDTO>({} as MealDTO)
   const [showAlertModal, setShowAlertModal] = useState(false)
+
   const theme = useTheme()
+  const route = useRoute()
+  const { meal } = useMeal()
   const navigation = useNavigation()
+  const { mealId } = route.params as RouteParams
+
+  function fetchMealDataId() {
+    try {
+      const foundMealById = meal.find((meal) =>
+        meal.data.find((data) => data.id === mealId),
+      )?.data[0]
+
+      if (foundMealById) {
+        setMealById(foundMealById)
+      }
+    } catch (error) {
+      console.log('fetchMealDataId =>', error)
+    }
+  }
 
   function handleOpenEditMeal() {
     navigation.navigate('edit')
@@ -19,29 +44,39 @@ export function Meal() {
   function handleToggleModal() {
     setShowAlertModal(!showAlertModal)
   }
+
   function handleDeleteMeal() {
     console.log('delete')
   }
 
+  useEffect(() => {
+    fetchMealDataId()
+  }, [mealId])
+
   return (
     <S.MealContainer>
-      <Header title="Refeição" />
+      <Header
+        title="Refeição"
+        colorScheme={mealById.isWithinDiet ? 'GOOD' : 'BAD'}
+      />
 
       <S.ContentContainer
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
       >
-        <S.Title>X-tudo</S.Title>
-        <S.Description>
-          Sanduíche de pão integral com atum e salada de alface e tomate
-        </S.Description>
+        <S.Title>{mealById.name}</S.Title>
+        <S.Description>{mealById.description}</S.Description>
 
         <S.Label>Data e Hora</S.Label>
-        <S.DateText>12/08/2022 às 16:00</S.DateText>
+        <S.DateText>
+          {mealById.date} às {mealById.time}
+        </S.DateText>
 
         <S.Tag>
-          <S.Status status="primary" />
-          <S.TagText>dentro da dieta</S.TagText>
+          <S.Status status={mealById.isWithinDiet ? 'primary' : 'secondary'} />
+          <S.TagText>
+            {mealById.isWithinDiet ? 'dentro da dieta' : 'fora da dieta'}
+          </S.TagText>
         </S.Tag>
 
         <S.ButtonsWrapper>

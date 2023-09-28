@@ -3,7 +3,7 @@ export declare global {
     interface RootParamList {
       new: undefined
       home: undefined
-      meal: undefined
+      meal: { mealId: string }
       edit: undefined
       feedback: { status: boolean }
       statistics: undefined

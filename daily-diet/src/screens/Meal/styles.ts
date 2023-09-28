@@ -33,7 +33,7 @@ export const Description = styled.Text`
   `}
 `
 export const Label = styled.Text`
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_100};
     font-size: ${theme.FONT_SIZE.MD}px;
@@ -41,7 +41,7 @@ export const Label = styled.Text`
   `};
 `
 export const DateText = styled.Text`
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_200};
     font-size: ${theme.FONT_SIZE.LG}px;

@@ -9,8 +9,8 @@ export function SectionMealList() {
   const { meal } = useMeal()
   const navigation = useNavigation()
 
-  function handleOpenMeal() {
-    navigation.navigate('meal')
+  function handleOpenMeal(id: string) {
+    navigation.navigate('meal', { mealId: id })
   }
 
   return (
@@ -18,7 +18,7 @@ export function SectionMealList() {
       sections={meal}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <MealCard data={item} onPress={handleOpenMeal} />
+        <MealCard data={item} onPress={() => handleOpenMeal(item.id)} />
       )}
       renderSectionHeader={({ section }) => <S.Title>{section.title}</S.Title>}
       showsVerticalScrollIndicator={false}
