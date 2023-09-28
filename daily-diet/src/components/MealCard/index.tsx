@@ -13,7 +13,7 @@ export function MealCard({ data, ...rest }: MealCardProps) {
 
       <S.Divider />
 
-      <S.TextMeal>{data.name}</S.TextMeal>
+      <S.TextMeal numberOfLines={1}>{data.name}</S.TextMeal>
 
       <S.Status type={data.isWithinDiet ? 'GOOD' : 'BAD'} />
     </S.MealCardContainer>
