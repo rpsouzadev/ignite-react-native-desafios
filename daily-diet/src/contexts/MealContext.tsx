@@ -21,19 +21,29 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
 
   function saveMeal(mealData: MealDTO) {
     try {
-      const findMealByDay = meal.find((meal) => meal.title === mealData.date)
+      setMeal((meal) => {
+        const newMeal = [...meal]
 
-      if (findMealByDay) {
-        findMealByDay.data.push(mealData)
-        setMeal([...meal])
-      } else {
-        const mealByDay = {
-          title: mealData.date,
-          data: [mealData],
+        const findMealByDay = newMeal.find(
+          (meal) => meal.title === mealData.date,
+        )
+
+        if (findMealByDay) {
+          findMealByDay.data.push(mealData)
+        } else {
+          const mealByDay = {
+            title: mealData.date,
+            data: [mealData],
+          }
+          newMeal.push(mealByDay)
         }
 
-        setMeal((prev) => [...prev, mealByDay])
-      }
+        return newMeal.sort((a, b) => {
+          const dateA = new Date(a.title.split('/').reverse().join('-'))
+          const dateB = new Date(b.title.split('/').reverse().join('-'))
+          return dateB.getTime() - dateA.getTime()
+        })
+      })
     } catch (error) {
       throw error
     }
