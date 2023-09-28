@@ -18,7 +18,7 @@ export const Avatar = styled.Image`
   border-radius: 20px;
 `
 export const AvatarEllipse = styled.View`
-  width: inherit;
-  border-radius: 9999px;
+  width: fit-content;
+  border-radius: 999px;
   border: 2px solid ${({ theme }) => theme.COLORS.GRAY_200};
 `
