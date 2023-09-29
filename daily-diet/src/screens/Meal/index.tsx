@@ -19,8 +19,8 @@ export function Meal() {
 
   const theme = useTheme()
   const route = useRoute()
-  const { meal } = useMeal()
   const navigation = useNavigation()
+  const { meal, removeMeal } = useMeal()
   const { mealId } = route.params as RouteParams
 
   function fetchMealDataId() {
@@ -46,7 +46,12 @@ export function Meal() {
   }
 
   function handleDeleteMeal() {
-    console.log('delete')
+    try {
+      removeMeal(mealId)
+      navigation.navigate('home')
+    } catch (error) {
+      console.log('handleDeleteMeal => ', error)
+    }
   }
 
   useEffect(() => {
@@ -93,7 +98,7 @@ export function Meal() {
           />
 
           <Button
-            title="Editar refeição"
+            title="Excluir refeição"
             variant="OUTLINE"
             onPress={handleToggleModal}
             Icon={

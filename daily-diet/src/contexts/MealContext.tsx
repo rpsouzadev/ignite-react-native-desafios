@@ -10,6 +10,7 @@ type MealContextProviderProps = {
 type MealContextDataProps = {
   meal: MealByDayDTO[]
   saveMeal: (mealData: MealDTO) => void
+  removeMeal: (mealId: string) => void
 }
 
 export const MealContext = createContext<MealContextDataProps>(
@@ -51,8 +52,23 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
     }
   }
 
+  function removeMeal(mealId: string) {
+    try {
+      const mealFiltered = meal.map((meal) => {
+        meal.data = meal.data.filter((data) => data.id !== mealId)
+        return meal
+      })
+
+      const newMeals = mealFiltered.filter((meal) => meal.data.length > 0)
+
+      setMeal(newMeals)
+    } catch (error) {
+      throw error
+    }
+  }
+
   return (
-    <MealContext.Provider value={{ meal, saveMeal }}>
+    <MealContext.Provider value={{ meal, saveMeal, removeMeal }}>
       {children}
     </MealContext.Provider>
   )
