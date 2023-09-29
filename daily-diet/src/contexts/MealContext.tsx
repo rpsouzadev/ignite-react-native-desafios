@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-catch */
+import { storageMealGet, storageMealSave } from '@storage/storageMeal'
 import { ReactNode, createContext, useState } from 'react'
 import { MealByDayDTO } from '@dtos/MealByDayDTO'
 import { MealDTO } from '@dtos/MealDTO'
@@ -20,33 +21,32 @@ export const MealContext = createContext<MealContextDataProps>(
 export function MealContextProvider({ children }: MealContextProviderProps) {
   const [meal, setMeal] = useState<MealByDayDTO[]>([])
 
-  function saveMeal(mealData: MealDTO) {
+  async function saveMeal(mealData: MealDTO) {
     try {
-      setMeal((meal) => {
-        const newMeal = [...meal]
+      const savedMeals = await storageMealGet()
+      const newMeal = [...savedMeals]
 
-        const findMealByDay = newMeal.find(
-          (meal) => meal.title === mealData.date,
-        )
+      const findMealByDay = newMeal.find((meal) => meal.title === mealData.date)
 
-        if (findMealByDay) {
-          findMealByDay.data.push(mealData)
+      if (findMealByDay) {
+        findMealByDay.data.push(mealData)
 
-          findMealByDay.data.sort((a, b) => {
-            return b.time.localeCompare(a.time)
-          })
-        } else {
-          const mealByDay = {
-            title: mealData.date,
-            data: [mealData],
-          }
-          newMeal.push(mealByDay)
-        }
-
-        return newMeal.sort((a, b) => {
-          return b.title.localeCompare(a.title)
+        findMealByDay.data.sort((a, b) => {
+          return b.time.localeCompare(a.time)
         })
+      } else {
+        const mealByDay = {
+          title: mealData.date,
+          data: [mealData],
+        }
+        newMeal.push(mealByDay)
+      }
+
+      newMeal.sort((a, b) => {
+        return b.title.localeCompare(a.title)
       })
+
+      setMeal(newMeal)
     } catch (error) {
       throw error
     }
@@ -60,7 +60,11 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
           return meal
         })
 
-        return updatedMeals.filter((meal) => meal.data.length > 0)
+        const currentMeals = updatedMeals.filter((meal) => meal.data.length > 0)
+
+        storageMealSave(currentMeals)
+
+        return currentMeals
       })
     } catch (error) {
       throw error
