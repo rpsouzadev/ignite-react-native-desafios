@@ -54,14 +54,14 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
 
   function removeMeal(mealId: string) {
     try {
-      const mealFiltered = meal.map((meal) => {
-        meal.data = meal.data.filter((data) => data.id !== mealId)
-        return meal
+      setMeal((meals) => {
+        const updatedMeals = meals.map((meal) => {
+          meal.data = meal.data.filter((data) => data.id !== mealId)
+          return meal
+        })
+
+        return updatedMeals.filter((meal) => meal.data.length > 0)
       })
-
-      const newMeals = mealFiltered.filter((meal) => meal.data.length > 0)
-
-      setMeal(newMeals)
     } catch (error) {
       throw error
     }
