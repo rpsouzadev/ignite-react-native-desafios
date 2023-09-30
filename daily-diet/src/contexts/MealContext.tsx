@@ -9,8 +9,10 @@ type MealContextProviderProps = {
 }
 
 type MealContextDataProps = {
+  mealById: MealDTO
   meal: MealByDayDTO[]
   isLoadingMealStorageData: boolean
+  getMealDataById: (mealId: string) => void
   saveMeal: (mealData: MealDTO) => Promise<void>
   removeMeal: (mealId: string) => Promise<void>
 }
@@ -21,6 +23,7 @@ export const MealContext = createContext<MealContextDataProps>(
 
 export function MealContextProvider({ children }: MealContextProviderProps) {
   const [meal, setMeal] = useState<MealByDayDTO[]>([])
+  const [mealById, setMealById] = useState<MealDTO>({} as MealDTO)
   const [isLoadingMealStorageData, setIsLoadingMealStorageData] = useState(true)
 
   async function saveAndUpdateMeal(meals: MealByDayDTO[]) {
@@ -82,6 +85,20 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
     }
   }
 
+  function getMealDataById(mealId: string) {
+    try {
+      const foundMeal = meal
+        .find((meal) => meal.data.some((data) => data.id === mealId))
+        ?.data.find((data) => data.id === mealId)
+
+      if (foundMeal) {
+        setMealById(foundMeal)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
   async function loadMealData() {
     try {
       setIsLoadingMealStorageData(true)
@@ -103,7 +120,14 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
 
   return (
     <MealContext.Provider
-      value={{ meal, saveMeal, removeMeal, isLoadingMealStorageData }}
+      value={{
+        meal,
+        mealById,
+        saveMeal,
+        removeMeal,
+        getMealDataById,
+        isLoadingMealStorageData,
+      }}
     >
       {children}
     </MealContext.Provider>

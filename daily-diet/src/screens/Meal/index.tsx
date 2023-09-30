@@ -1,41 +1,19 @@
 import * as S from './styles'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useMeal } from '@hooks/useMeal'
 import { Button } from '@components/Button'
 import { Header } from '@components/Header'
 import { useTheme } from 'styled-components/native'
 import { AlertModal } from '@components/AlertModal'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { PencilSimpleLine, Trash } from 'phosphor-react-native'
-import { MealDTO } from '@dtos/MealDTO'
-
-type RouteParams = {
-  mealId: string
-}
 
 export function Meal() {
-  const [mealById, setMealById] = useState<MealDTO>({} as MealDTO)
   const [showAlertModal, setShowAlertModal] = useState(false)
 
   const theme = useTheme()
-  const route = useRoute()
   const navigation = useNavigation()
-  const { meal, removeMeal } = useMeal()
-  const { mealId } = route.params as RouteParams
-
-  function fetchMealDataId() {
-    try {
-      const foundMealById = meal.find((meal) =>
-        meal.data.find((data) => data.id === mealId),
-      )?.data[0]
-
-      if (foundMealById) {
-        setMealById(foundMealById)
-      }
-    } catch (error) {
-      console.log('fetchMealDataId =>', error)
-    }
-  }
+  const { mealById, removeMeal } = useMeal()
 
   function handleOpenEditMeal() {
     navigation.navigate('edit')
@@ -47,16 +25,12 @@ export function Meal() {
 
   async function handleDeleteMeal() {
     try {
-      await removeMeal(mealId)
+      await removeMeal(mealById.id)
       navigation.navigate('home')
     } catch (error) {
       console.log('handleDeleteMeal => ', error)
     }
   }
-
-  useEffect(() => {
-    fetchMealDataId()
-  }, [mealId])
 
   return (
     <S.MealContainer>

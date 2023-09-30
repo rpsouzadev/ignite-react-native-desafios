@@ -6,11 +6,12 @@ import { useNavigation } from '@react-navigation/native'
 import { EmptyList } from './EmptyList'
 
 export function SectionMealList() {
-  const { meal } = useMeal()
+  const { meal, getMealDataById } = useMeal()
   const navigation = useNavigation()
 
   function handleOpenMeal(id: string) {
-    navigation.navigate('meal', { mealId: id })
+    getMealDataById(id)
+    navigation.navigate('meal')
   }
 
   return (
