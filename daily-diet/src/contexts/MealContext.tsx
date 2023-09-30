@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 import { storageMealGet, storageMealSave } from '@storage/storageMeal'
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 import { MealByDayDTO } from '@dtos/MealByDayDTO'
 import { MealDTO } from '@dtos/MealDTO'
 
@@ -10,8 +10,9 @@ type MealContextProviderProps = {
 
 type MealContextDataProps = {
   meal: MealByDayDTO[]
-  saveMeal: (mealData: MealDTO) => void
-  removeMeal: (mealId: string) => void
+  isLoadingMealStorageData: boolean
+  saveMeal: (mealData: MealDTO) => Promise<void>
+  removeMeal: (mealId: string) => Promise<void>
 }
 
 export const MealContext = createContext<MealContextDataProps>(
@@ -20,6 +21,19 @@ export const MealContext = createContext<MealContextDataProps>(
 
 export function MealContextProvider({ children }: MealContextProviderProps) {
   const [meal, setMeal] = useState<MealByDayDTO[]>([])
+  const [isLoadingMealStorageData, setIsLoadingMealStorageData] = useState(true)
+
+  async function saveAndUpdateMeal(meals: MealByDayDTO[]) {
+    try {
+      setIsLoadingMealStorageData(true)
+      await storageMealSave(meals)
+      setMeal(meals)
+    } catch (error) {
+      console.log('saveAndUpdateMeal => ', error)
+    } finally {
+      setIsLoadingMealStorageData(false)
+    }
+  }
 
   async function saveMeal(mealData: MealDTO) {
     try {
@@ -46,33 +60,51 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
         return b.title.localeCompare(a.title)
       })
 
-      setMeal(newMeal)
+      await saveAndUpdateMeal(newMeal)
     } catch (error) {
       throw error
     }
   }
 
-  function removeMeal(mealId: string) {
+  async function removeMeal(mealId: string) {
     try {
-      setMeal((meals) => {
-        const updatedMeals = meals.map((meal) => {
-          meal.data = meal.data.filter((data) => data.id !== mealId)
-          return meal
-        })
-
-        const currentMeals = updatedMeals.filter((meal) => meal.data.length > 0)
-
-        storageMealSave(currentMeals)
-
-        return currentMeals
+      const savedMealData = await storageMealGet()
+      const mealFiltered = savedMealData.map((meal) => {
+        meal.data = meal.data.filter((data) => data.id !== mealId)
+        return meal
       })
+
+      const newMeals = mealFiltered.filter((meal) => meal.data.length > 0)
+
+      saveAndUpdateMeal(newMeals)
     } catch (error) {
       throw error
     }
   }
+
+  async function loadMealData() {
+    try {
+      setIsLoadingMealStorageData(true)
+      const savedMealData = await storageMealGet()
+
+      if (savedMealData) {
+        setMeal(savedMealData)
+      }
+    } catch (error) {
+      throw error
+    } finally {
+      setIsLoadingMealStorageData(false)
+    }
+  }
+
+  useEffect(() => {
+    loadMealData()
+  }, [])
 
   return (
-    <MealContext.Provider value={{ meal, saveMeal, removeMeal }}>
+    <MealContext.Provider
+      value={{ meal, saveMeal, removeMeal, isLoadingMealStorageData }}
+    >
       {children}
     </MealContext.Provider>
   )

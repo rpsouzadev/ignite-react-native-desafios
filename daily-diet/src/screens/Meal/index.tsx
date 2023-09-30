@@ -45,9 +45,9 @@ export function Meal() {
     setShowAlertModal(!showAlertModal)
   }
 
-  function handleDeleteMeal() {
+  async function handleDeleteMeal() {
     try {
-      removeMeal(mealId)
+      await removeMeal(mealId)
       navigation.navigate('home')
     } catch (error) {
       console.log('handleDeleteMeal => ', error)

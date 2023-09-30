@@ -55,14 +55,14 @@ export function NewMeal() {
     setShowTimePicker(!showTimePicker)
   }
 
-  function handleAddNewMeal(data: FormDataProps) {
+  async function handleAddNewMeal(data: FormDataProps) {
     try {
       const mealData = {
         ...data,
         id: Date.now().toString(),
       }
 
-      saveMeal(mealData)
+      await saveMeal(mealData)
 
       navigation.navigate('feedback', { status: data.isWithinDiet })
     } catch (error) {
