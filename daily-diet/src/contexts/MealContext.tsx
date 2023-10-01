@@ -1,8 +1,9 @@
 /* eslint-disable no-useless-catch */
 import { storageMealGet, storageMealSave } from '@storage/storageMeal'
-import { ReactNode, createContext, useEffect, useState } from 'react'
+import { ReactNode, createContext, useEffect, useMemo, useState } from 'react'
 import { MealByDayDTO } from '@dtos/MealByDayDTO'
 import { MealDTO } from '@dtos/MealDTO'
+import { MetricsDTO } from '@dtos/MetricsDTO'
 
 type MealContextProviderProps = {
   children: ReactNode
@@ -10,6 +11,7 @@ type MealContextProviderProps = {
 
 type MealContextDataProps = {
   mealById: MealDTO
+  metrics: MetricsDTO
   meal: MealByDayDTO[]
   isLoadingMealStorageData: boolean
   getMealDataById: (mealId: string) => Promise<void>
@@ -25,14 +27,16 @@ export const MealContext = createContext<MealContextDataProps>(
 export function MealContextProvider({ children }: MealContextProviderProps) {
   const [meal, setMeal] = useState<MealByDayDTO[]>([])
   const [mealById, setMealById] = useState<MealDTO>({} as MealDTO)
+  const [metrics, setMetrics] = useState<MetricsDTO>({} as MetricsDTO)
   const [isLoadingMealStorageData, setIsLoadingMealStorageData] = useState(true)
 
   async function saveAndUpdateMeal(meals: MealByDayDTO[]) {
     try {
       await storageMealSave(meals)
+      await calculateMetrics()
       setMeal(meals)
     } catch (error) {
-      console.log('saveAndUpdateMeal => ', error)
+      throw error
     }
   }
 
@@ -137,12 +141,60 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
     }
   }
 
+  async function calculateMetrics() {
+    try {
+      const savedMeals = await storageMealGet()
+      const total = savedMeals.reduce(
+        (acc, mealByDay) => acc + mealByDay.data.length,
+        0,
+      )
+
+      const totalWithinDiet = savedMeals.reduce((acc, mealByDay) => {
+        const mealsWithinDiet = mealByDay.data.filter(
+          (data) => data.isWithinDiet === true,
+        )
+        return acc + mealsWithinDiet.length
+      }, 0)
+
+      const totalOutDiet = savedMeals.reduce((acc, mealByDay) => {
+        const mealsWithinDiet = mealByDay.data.filter(
+          (data) => data.isWithinDiet === false,
+        )
+        return acc + mealsWithinDiet.length
+      }, 0)
+
+      const findPercentage = (totalWithinDiet * 100) / total
+      const percentage = parseFloat(findPercentage.toFixed(2))
+
+      let status = true
+      if (percentage > 50) {
+        status = true
+      } else {
+        status = false
+      }
+
+      const result: MetricsDTO = {
+        total,
+        status,
+        percentage,
+        totalOutDiet,
+        totalWithinDiet,
+        offensiveCount: 20,
+      }
+
+      setMetrics(result)
+    } catch (error) {
+      throw error
+    }
+  }
+
   async function loadMealData() {
     try {
       setIsLoadingMealStorageData(true)
       const savedMealData = await storageMealGet()
 
       if (savedMealData) {
+        await calculateMetrics()
         setMeal(savedMealData)
       }
     } catch (error) {
@@ -160,6 +212,7 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
     <MealContext.Provider
       value={{
         meal,
+        metrics,
         mealById,
         saveMeal,
         removeMeal,

@@ -11,7 +11,7 @@ import { SectionMealList } from '@components/SectionMealList'
 export function Home() {
   const theme = useTheme()
   const navigation = useNavigation()
-  const { meal } = useMeal()
+  const { metrics } = useMeal()
 
   function handleOpenStatistics() {
     navigation.navigate('statistics')
@@ -25,7 +25,11 @@ export function Home() {
     <S.HomeContainer>
       <HomeHeader />
 
-      <Info percentage="90,86%" onPress={handleOpenStatistics} />
+      <Info
+        type={metrics.status}
+        percentage={`${metrics.percentage}%`}
+        onPress={handleOpenStatistics}
+      />
 
       <S.Title>Refeições</S.Title>
 
