@@ -12,12 +12,13 @@ export const StatisticsContainer = styled.View`
 export const ContentContainer = styled.View`
   flex: 1;
   margin-top: -30px;
-  padding: 24px;
+  padding: 0 24px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_700};
 `
 export const Title = styled.Text`
+  margin-top: 33px;
   margin-bottom: 20px;
   text-align: center;
   ${({ theme }) => css`
@@ -45,7 +46,7 @@ export const Description = styled.Text`
 export const Box = styled.View`
   width: 100%;
   padding: 16px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   border-radius: 8px;
   align-items: center;
   justify-content: center;
@@ -63,5 +64,5 @@ export const BoxSmall = styled.View<StatisticsStyleProps>`
 export const BoxWrapper = styled.View`
   flex-direction: row;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 `
