@@ -175,13 +175,34 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
         status = false
       }
 
+      let maxOffensiveCount = 0
+      let currentOffensiveCount = 0
+
+      savedMeals.forEach((mealByDay) => {
+        mealByDay.data.forEach((data) => {
+          if (data.isWithinDiet) {
+            currentOffensiveCount++
+          } else {
+            maxOffensiveCount = Math.max(
+              maxOffensiveCount,
+              currentOffensiveCount,
+            )
+            currentOffensiveCount = 0
+          }
+        })
+      })
+
+      maxOffensiveCount = Math.max(maxOffensiveCount, currentOffensiveCount)
+
+      const offensiveCount = maxOffensiveCount
+
       const result: MetricsDTO = {
         total,
         status,
         percentage,
         totalOutDiet,
         totalWithinDiet,
-        offensiveCount: 20,
+        offensiveCount,
       }
 
       setMetrics(result)
