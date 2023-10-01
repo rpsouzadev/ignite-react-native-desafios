@@ -9,8 +9,8 @@ export function SectionMealList() {
   const { meal, getMealDataById } = useMeal()
   const navigation = useNavigation()
 
-  function handleOpenMeal(id: string) {
-    getMealDataById(id)
+  async function handleOpenMeal(id: string) {
+    await getMealDataById(id)
     navigation.navigate('meal')
   }
 

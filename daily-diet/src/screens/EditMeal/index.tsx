@@ -68,7 +68,7 @@ export function EditMeal() {
         id: mealById.id,
       }
       await updateMealData(updateData)
-      navigation.navigate('feedback', { status: data.isWithinDiet })
+      navigation.navigate('meal')
     } catch (error) {
       console.log('handleUpdateMeal => ', error)
     }

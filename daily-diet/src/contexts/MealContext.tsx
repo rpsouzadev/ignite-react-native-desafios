@@ -12,7 +12,7 @@ type MealContextDataProps = {
   mealById: MealDTO
   meal: MealByDayDTO[]
   isLoadingMealStorageData: boolean
-  getMealDataById: (mealId: string) => void
+  getMealDataById: (mealId: string) => Promise<void>
   saveMeal: (mealData: MealDTO) => Promise<void>
   removeMeal: (mealId: string) => Promise<void>
   updateMealData: (mealData: MealDTO) => Promise<void>
@@ -83,9 +83,11 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
     }
   }
 
-  function getMealDataById(mealId: string) {
+  async function getMealDataById(mealId: string) {
     try {
-      const foundMeal = meal
+      const savedMeals = await storageMealGet()
+
+      const foundMeal = savedMeals
         .find((meal) => meal.data.some((data) => data.id === mealId))
         ?.data.find((data) => data.id === mealId)
 
@@ -113,6 +115,7 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
         mealUpdate.isWithinDiet = updateData.isWithinDiet
 
         await saveAndUpdateMeal(newMealUpdate)
+        await getMealDataById(mealUpdate.id)
         return
       }
 
@@ -125,8 +128,9 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
           isWithinDiet: updateData.isWithinDiet,
           id: Date.now().toString(),
         }
-        await removeMeal(mealUpdate.id)
         await saveMeal(newMeal)
+        await getMealDataById(newMeal.id)
+        await removeMeal(mealUpdate.id)
       }
     } catch (error) {
       throw error
