@@ -62,7 +62,9 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
       }
 
       newMeal.sort((a, b) => {
-        return b.title.localeCompare(a.title)
+        const dateA = new Date(a.title.split('/').reverse().join('-'))
+        const dateB = new Date(b.title.split('/').reverse().join('-'))
+        return dateB.getTime() - dateA.getTime()
       })
 
       await saveAndUpdateMeal(newMeal)
