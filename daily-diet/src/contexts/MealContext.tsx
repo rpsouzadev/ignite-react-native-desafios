@@ -15,6 +15,7 @@ type MealContextDataProps = {
   getMealDataById: (mealId: string) => void
   saveMeal: (mealData: MealDTO) => Promise<void>
   removeMeal: (mealId: string) => Promise<void>
+  updateMealData: (mealData: MealDTO) => Promise<void>
 }
 
 export const MealContext = createContext<MealContextDataProps>(
@@ -28,13 +29,10 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
 
   async function saveAndUpdateMeal(meals: MealByDayDTO[]) {
     try {
-      setIsLoadingMealStorageData(true)
       await storageMealSave(meals)
       setMeal(meals)
     } catch (error) {
       console.log('saveAndUpdateMeal => ', error)
-    } finally {
-      setIsLoadingMealStorageData(false)
     }
   }
 
@@ -99,6 +97,42 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
     }
   }
 
+  async function updateMealData(updateData: MealDTO) {
+    try {
+      const savedMeals = await storageMealGet()
+      const newMealUpdate = [...savedMeals]
+
+      const mealUpdate = newMealUpdate
+        .find((meal) => meal.data.some((data) => data.id === updateData.id))
+        ?.data.find((data) => data.id === updateData.id)
+
+      if (mealUpdate && mealUpdate.date === updateData.date) {
+        mealUpdate.name = updateData.name
+        mealUpdate.time = updateData.time
+        mealUpdate.description = updateData.description
+        mealUpdate.isWithinDiet = updateData.isWithinDiet
+
+        await saveAndUpdateMeal(newMealUpdate)
+        return
+      }
+
+      if (mealUpdate && mealUpdate.date !== updateData.date) {
+        const newMeal: MealDTO = {
+          name: updateData.name,
+          description: updateData.description,
+          date: updateData.date,
+          time: updateData.time,
+          isWithinDiet: updateData.isWithinDiet,
+          id: Date.now().toString(),
+        }
+        await removeMeal(mealUpdate.id)
+        await saveMeal(newMeal)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
   async function loadMealData() {
     try {
       setIsLoadingMealStorageData(true)
@@ -125,6 +159,7 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
         mealById,
         saveMeal,
         removeMeal,
+        updateMealData,
         getMealDataById,
         isLoadingMealStorageData,
       }}

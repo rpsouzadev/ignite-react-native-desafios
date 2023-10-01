@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native'
 import { ButtonInOrOut } from '@components/ButtonInOrOut'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import * as yup from 'yup'
+import { useMeal } from '@hooks/useMeal'
 
 type FormDataProps = {
   name: string
@@ -33,7 +34,7 @@ export function EditMeal() {
 
   const dateInputRef = useRef<TextInput>(null)
   const timeInputRef = useRef<TextInput>(null)
-
+  const { mealById, updateMealData } = useMeal()
   const navigation = useNavigation()
 
   const {
@@ -42,6 +43,13 @@ export function EditMeal() {
     setValue,
     formState: { errors },
   } = useForm<FormDataProps>({
+    defaultValues: {
+      name: mealById.name,
+      description: mealById.description,
+      date: mealById.date,
+      time: mealById.time,
+      isWithinDiet: mealById.isWithinDiet,
+    },
     resolver: yupResolver(newMealSchema),
   })
 
@@ -53,8 +61,17 @@ export function EditMeal() {
     setShowTimePicker(!showTimePicker)
   }
 
-  function handleUpdateMeal(data: FormDataProps) {
-    navigation.navigate('feedback')
+  async function handleUpdateMeal(data: FormDataProps) {
+    try {
+      const updateData = {
+        ...data,
+        id: mealById.id,
+      }
+      await updateMealData(updateData)
+      navigation.navigate('feedback', { status: data.isWithinDiet })
+    } catch (error) {
+      console.log('handleUpdateMeal => ', error)
+    }
   }
 
   return (
@@ -86,6 +103,7 @@ export function EditMeal() {
               title="Descrição"
               size={120}
               value={value}
+              multiline={true}
               textAlignVertical="top"
               onChangeText={onChange}
               errorMessage={errors.description?.message}
