@@ -25,7 +25,9 @@ export function SectionMealList() {
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={() => <EmptyList />}
       contentContainerStyle={
-        meal.length === 0 && { flex: 1, justifyContent: 'center' }
+        meal.length === 0
+          ? { flex: 1, justifyContent: 'center' }
+          : { paddingBottom: 100 }
       }
     />
   )
