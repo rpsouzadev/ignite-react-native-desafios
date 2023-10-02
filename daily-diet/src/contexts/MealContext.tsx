@@ -166,7 +166,9 @@ export function MealContextProvider({ children }: MealContextProviderProps) {
       }, 0)
 
       const findPercentage = (totalWithinDiet * 100) / total
-      const percentage = parseFloat(findPercentage.toFixed(2))
+      const percentage = findPercentage
+        ? parseFloat(findPercentage.toFixed(2))
+        : 0
 
       let status = true
       if (percentage > 50) {
