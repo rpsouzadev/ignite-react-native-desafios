@@ -99,6 +99,7 @@ export function NewMeal() {
               title="Descrição"
               size={120}
               value={value}
+              multiline={true}
               textAlignVertical="top"
               onChangeText={onChange}
               errorMessage={errors.description?.message}
