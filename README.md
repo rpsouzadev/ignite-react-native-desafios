@@ -11,7 +11,7 @@ Repositório criado para armazenar todos os desafios do curso de React Native da
 ## Desafio 01 - To-Do List
 
 <div width=100% align='center'>
-  <a href = "/tree/master/to-do-list"><img src="https://img.shields.io/badge/-Código fonte-181717?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
+  <a href = "/to-do-list"><img src="https://img.shields.io/badge/-Código fonte-181717?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
   <a href="https://youtu.be/tf6B_WdwY4U" target="_blank"><img src="https://img.shields.io/badge/Youtube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" target="_blank"></a>
   <a href="https://efficient-sloth-d85.notion.site/Desafio-01-Praticando-os-conceitos-do-React-Native-f8f164e29df74cd987e1f9aebf142ffb" target="_blank">
     <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white" target="_blank">
