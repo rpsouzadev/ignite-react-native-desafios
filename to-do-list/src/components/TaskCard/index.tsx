@@ -1,4 +1,4 @@
-import { TaskProps } from '../../screens/Home'
+import { TaskProps } from '../../screens/Home/types'
 import * as S from './styles'
 
 type TaskCardProps = {
