@@ -11,6 +11,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.1.6",
     "@expo-google-fonts/inter": "^0.2.3",
+    "@react-native-async-storage/async-storage": "1.18.2",
     "@rocketseat/eslint-config": "^2.1.0",
     "@types/react": "~18.2.14",
     "eslint": "^8.47.0",

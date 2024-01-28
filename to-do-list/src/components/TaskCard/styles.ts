@@ -2,10 +2,10 @@ import { Feather } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
 import styled, { css } from 'styled-components/native'
 
-export type TeskTextStyleProps = 'noCHECK' | 'isCHECK'
+export type TaskTextStyleProps = 'noCHECK' | 'isCHECK'
 
 type TextProps = {
-  type: TeskTextStyleProps
+  type: TaskTextStyleProps
 }
 
 export const Container = styled.View`
@@ -23,6 +23,7 @@ export const Container = styled.View`
 `
 export const TaskText = styled.Text<TextProps>`
   max-width: 280px;
+  padding: 0 12px;
   ${({ theme, type }) => css`
     color: ${type === 'noCHECK'
       ? theme.COLORS.GRAY_100
