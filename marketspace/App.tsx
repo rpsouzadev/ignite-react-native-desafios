@@ -1,3 +1,4 @@
+import { StatusBar } from 'react-native'
 import {
   useFonts,
   Karla_700Bold,
@@ -14,6 +15,12 @@ export default function App() {
 
   return (
     <GluestackUIProvider config={config}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent
+      />
+
       {fontsLoaded ? <Login /> : <Loading />}
     </GluestackUIProvider>
   )

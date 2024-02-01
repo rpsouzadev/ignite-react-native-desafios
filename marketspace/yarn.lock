@@ -2231,6 +2231,11 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@phosphor-icons/core@^2.0.2":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@phosphor-icons/core/-/core-2.0.8.tgz#dfa056d6187409747ac54a62ca76bae543f803fe"
+  integrity sha512-I9MdTtqjqZDXwo6bbG5lRWZUJMWgXc70hZAVG1OVNVmb6j7039slVXLDH4VEok3U3h1Yhotxe8G5l4sPHJBDzQ==
+
 "@pkgr/core@^0.1.0":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@pkgr/core/-/core-0.1.1.tgz#1ec17e2edbec25c8306d424ecfbf13c7de1aaa31"
@@ -4189,6 +4194,11 @@ camelcase@^6.2.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-6.3.0.tgz#5685b95eb209ac9c0c177467778c9c84df58ba9a"
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
+
+caniuse-lite@^1.0.30001518:
+  version "1.0.30001582"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001582.tgz#db3070547ce0b48d9f44a509b86c4a02ba5d9055"
+  integrity sha512-vsJG3V5vgfduaQGVxL53uSX/HUzxyr2eA8xCo36OLal7sRcSZbibJtLeh0qja4sFOr/QQGt4opB4tOy+eOgAxg==
 
 caniuse-lite@^1.0.30001580:
   version "1.0.30001581"
@@ -7581,6 +7591,14 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
+
+phosphor-react-native@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/phosphor-react-native/-/phosphor-react-native-2.0.0.tgz#9ca14b4bd3e29e33279bb703b0ab445475d7b8a7"
+  integrity sha512-Q1WtmdFKq5w0rJAZMvYDzUBAHzL1s41Rc3cn3uTutQcLAo81Vjv/X2Im0bxET7is+70R4WDCPf+ZQEoOhaC5Vw==
+  dependencies:
+    "@phosphor-icons/core" "^2.0.2"
+    caniuse-lite "^1.0.30001518"
 
 picocolors@^1.0.0:
   version "1.0.0"
