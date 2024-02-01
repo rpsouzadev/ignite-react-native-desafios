@@ -87,7 +87,7 @@ export const gluestackUIConfig = createConfig({
       '4/6': '66.666%',
       '5/6': '83.333%',
       full: '100%',
-    },
+    } as const,
     borderWidths: {
       '0': 0,
       '1': 1,

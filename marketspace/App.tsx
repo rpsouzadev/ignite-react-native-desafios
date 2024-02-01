@@ -7,13 +7,14 @@ import { GluestackUIProvider } from '@gluestack-ui/themed'
 import { config } from './config/gluestack-ui.config'
 
 import { Loading } from '@/components/Loading/Loading'
+import { Login } from '@/screens/auth/login/login'
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Karla_700Bold, Karla_400Regular })
 
   return (
     <GluestackUIProvider config={config}>
-      <Loading />
+      {fontsLoaded ? <Login /> : <Loading />}
     </GluestackUIProvider>
   )
 }
