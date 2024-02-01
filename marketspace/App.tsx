@@ -4,17 +4,17 @@ import {
   Karla_700Bold,
   Karla_400Regular,
 } from '@expo-google-fonts/karla'
-import { GluestackUIProvider } from '@gluestack-ui/themed'
-import { config } from './config/gluestack-ui.config'
+import { NativeBaseProvider } from 'native-base'
 
 import { Loading } from '@/components/Loading/Loading'
-import { Login } from '@/screens/auth/login/login'
+import { Login } from '@/screens/auth/Login/Login'
+import { THEME } from '@/Theme/Theme'
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Karla_700Bold, Karla_400Regular })
 
   return (
-    <GluestackUIProvider config={config}>
+    <NativeBaseProvider theme={THEME}>
       <StatusBar
         barStyle="dark-content"
         backgroundColor="transparent"
@@ -22,6 +22,6 @@ export default function App() {
       />
 
       {fontsLoaded ? <Login /> : <Loading />}
-    </GluestackUIProvider>
+    </NativeBaseProvider>
   )
 }
