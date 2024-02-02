@@ -1,11 +1,11 @@
-import { Center, HStack, Heading, Image, Text } from 'native-base'
+import { Center, Heading, Image, Text, VStack } from 'native-base'
 
 import LogoImg from '@/assets/logo.png'
-// import { Input } from '@/components/Input/Input'
+import { Input } from '@/components/Input/Input'
 
 export function Login() {
   return (
-    <HStack bg="gray.700" flex={1}>
+    <VStack bg="gray.700" flex={1}>
       <Center bg="gray.600" flex={1} px={12} pb={16} pt={24} rounded="3xl">
         <Image
           source={LogoImg}
@@ -23,8 +23,8 @@ export function Login() {
           Seu espaço de compra e venda
         </Text>
 
-        {/* <Input /> */}
+        <Input />
       </Center>
-    </HStack>
+    </VStack>
   )
 }
