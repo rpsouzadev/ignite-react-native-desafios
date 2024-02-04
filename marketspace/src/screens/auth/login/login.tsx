@@ -21,7 +21,7 @@ export function Login() {
   const { showPassword, toggleShowPassword } = useLogin()
 
   return (
-    <ScrollView bg="gray.700" flex={1}>
+    <ScrollView bg="gray.700" flex={1} pb={100}>
       <VStack>
         <Center bg="gray.600" px={12} pb={16} pt={24} rounded="3xl">
           <Image
@@ -63,6 +63,14 @@ export function Login() {
           />
 
           <Button title="Entrar" />
+        </Center>
+
+        <Center px={12}>
+          <Text color="gray.200" fontSize="md" mt={16} mb={4}>
+            Ainda não tem acesso?
+          </Text>
+
+          <Button title="Criar uma conta" colorScheme="default" />
         </Center>
       </VStack>
     </ScrollView>
