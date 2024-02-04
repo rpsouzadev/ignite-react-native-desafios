@@ -3,18 +3,23 @@ import {
   Heading,
   Icon,
   Image,
+  Pressable,
   ScrollView,
   Text,
   VStack,
 } from 'native-base'
 
-import { Eye } from 'phosphor-react-native'
+import { Eye, EyeClosed } from 'phosphor-react-native'
+
+import { useLogin } from './useLogin'
 
 import LogoImg from '@/assets/logo.png'
 import { Input } from '@/components/Input/Input'
 import { Button } from '@/components/Button/Button'
 
 export function Login() {
+  const { showPassword, toggleShowPassword } = useLogin()
+
   return (
     <ScrollView bg="gray.700" flex={1}>
       <VStack>
@@ -44,7 +49,17 @@ export function Login() {
           <Input
             mb={8}
             placeholder="Senha"
-            rightElement={<Icon as={Eye} color="gray.300" size={6} mr={4} />}
+            type={showPassword ? 'text' : 'password'}
+            rightElement={
+              <Pressable onPress={toggleShowPassword}>
+                <Icon
+                  as={showPassword ? Eye : EyeClosed}
+                  color="gray.300"
+                  size={6}
+                  mr={4}
+                />
+              </Pressable>
+            }
           />
 
           <Button title="Entrar" />
