@@ -18,7 +18,15 @@ import { Input } from '@/components/Input/Input'
 import { Button } from '@/components/Button/Button'
 
 export function Login() {
-  const { showPassword, toggleShowPassword } = useLogin()
+  const {
+    errors,
+    control,
+    Controller,
+    handleLogin,
+    handleSubmit,
+    showPassword,
+    toggleShowPassword,
+  } = useLogin()
 
   return (
     <ScrollView bg="gray.700" flex={1} pb={100}>
@@ -44,25 +52,48 @@ export function Login() {
             Acesse sua conta
           </Text>
 
-          <Input mb={4} placeholder="E-mail" />
-
-          <Input
-            mb={8}
-            placeholder="Senha"
-            type={showPassword ? 'text' : 'password'}
-            rightElement={
-              <Pressable onPress={toggleShowPassword}>
-                <Icon
-                  as={showPassword ? Eye : EyeClosed}
-                  color="gray.300"
-                  size={6}
-                  mr={4}
-                />
-              </Pressable>
-            }
+          <Controller
+            name="email"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                placeholder="E-mail"
+                value={value}
+                keyboardType="email-address"
+                onChangeText={onChange}
+                errorMessage={errors.email?.message}
+              />
+            )}
           />
 
-          <Button title="Entrar" />
+          <Controller
+            name="password"
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Input
+                placeholder="Senha"
+                value={value}
+                secureTextEntry
+                onChangeText={onChange}
+                errorMessage={errors.password?.message}
+                onSubmitEditing={handleSubmit(handleLogin)}
+                returnKeyType="send"
+                type={showPassword ? 'text' : 'password'}
+                rightElement={
+                  <Pressable onPress={toggleShowPassword}>
+                    <Icon
+                      as={showPassword ? Eye : EyeClosed}
+                      color="gray.300"
+                      size={6}
+                      mr={4}
+                    />
+                  </Pressable>
+                }
+              />
+            )}
+          />
+
+          <Button mt={4} title="Entrar" onPress={handleSubmit(handleLogin)} />
         </Center>
 
         <Center px={12}>
