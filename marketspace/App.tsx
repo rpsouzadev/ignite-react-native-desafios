@@ -1,4 +1,5 @@
-import { StatusBar } from 'react-native'
+import { useEffect } from 'react'
+import { LogBox, StatusBar } from 'react-native'
 import {
   useFonts,
   Karla_700Bold,
@@ -6,12 +7,18 @@ import {
 } from '@expo-google-fonts/karla'
 import { NativeBaseProvider } from 'native-base'
 
-import { Loading } from '@/components/Loading/Loading'
-import { Login } from '@/screens/auth/Login/Login'
 import { THEME } from '@/Theme/Theme'
+import { Routes } from '@/routes/routes'
+import { Loading } from '@/components/Loading/Loading'
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Karla_700Bold, Karla_400Regular })
+
+  useEffect(() => {
+    LogBox.ignoreLogs([
+      'In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.',
+    ])
+  }, [])
 
   return (
     <NativeBaseProvider theme={THEME}>
@@ -21,7 +28,7 @@ export default function App() {
         translucent
       />
 
-      {fontsLoaded ? <Login /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </NativeBaseProvider>
   )
 }

@@ -25,6 +25,7 @@ export function Login() {
     handleLogin,
     handleSubmit,
     showPassword,
+    handleNewAccount,
     toggleShowPassword,
   } = useLogin()
 
@@ -101,7 +102,11 @@ export function Login() {
             Ainda não tem acesso?
           </Text>
 
-          <Button title="Criar uma conta" colorScheme="default" />
+          <Button
+            title="Criar uma conta"
+            colorScheme="default"
+            onPress={handleNewAccount}
+          />
         </Center>
       </VStack>
     </ScrollView>
