@@ -3,7 +3,7 @@ import LogoImg from '@/assets/logo.png'
 
 export function HeaderSigUp() {
   return (
-    <Center mb={20}>
+    <Center mb={8}>
       <Image
         source={LogoImg}
         defaultSource={LogoImg}
