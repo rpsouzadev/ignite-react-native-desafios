@@ -9,6 +9,7 @@ export function PhotoPicker() {
     <View
       w="24"
       h="24"
+      mb={4}
       rounded="full"
       borderWidth={4}
       borderColor="blueLight"
