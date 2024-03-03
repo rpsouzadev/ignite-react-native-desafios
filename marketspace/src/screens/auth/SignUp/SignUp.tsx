@@ -99,11 +99,8 @@ export function SignUp() {
               <Input
                 placeholder="Confirmar senha"
                 value={value}
-                secureTextEntry
                 onChangeText={onChange}
                 errorMessage={errors.confirmPassword?.message}
-                onSubmitEditing={handleSubmit(handleSignUp)}
-                returnKeyType="send"
                 type={showConfirmPassword ? 'text' : 'password'}
                 rightElement={
                   <Pressable onPress={toggleShowConfirmPassword}>
