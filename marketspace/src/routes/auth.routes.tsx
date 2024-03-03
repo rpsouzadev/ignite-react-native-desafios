@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { Login } from '@/screens/auth/Login/Login'
-import { SignUp } from '@/screens/auth/SignUp/SingUp'
+import { SignUp } from '@/screens/auth/SignUp/SignUp'
 import { AuthRoutesProps } from '@/routes/types'
 
 const { Navigator, Screen } = createNativeStackNavigator<AuthRoutesProps>()
