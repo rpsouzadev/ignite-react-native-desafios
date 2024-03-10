@@ -15,6 +15,7 @@ export function Button({
       minH={45}
       maxH={45}
       w="full"
+      flex={1}
       bg={
         colorScheme === 'primary'
           ? 'blueLight'
