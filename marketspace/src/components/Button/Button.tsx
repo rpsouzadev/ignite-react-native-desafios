@@ -18,7 +18,7 @@ export function Button({
       flex={1}
       bg={
         colorScheme === 'primary'
-          ? 'blueLight'
+          ? 'blue.400'
           : colorScheme === 'secondary'
             ? 'gray.100'
             : 'gray.500'
@@ -26,7 +26,7 @@ export function Button({
       _pressed={{
         bg:
           colorScheme === 'primary'
-            ? 'blueLight'
+            ? 'blue.400'
             : colorScheme === 'secondary'
               ? 'gray.100'
               : 'gray.500',

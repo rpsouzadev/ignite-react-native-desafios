@@ -14,7 +14,7 @@ export function UserPhoto({ size, label, name, ...rest }: UserPhotoProps) {
         h={size}
         rounded="full"
         borderWidth={2}
-        borderColor="blueLight"
+        borderColor="blue.400"
         alt=""
         {...rest}
       />

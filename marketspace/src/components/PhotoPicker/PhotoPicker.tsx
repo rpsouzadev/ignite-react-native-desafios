@@ -12,7 +12,7 @@ export function PhotoPicker() {
       mb={4}
       rounded="full"
       borderWidth={4}
-      borderColor="blueLight"
+      borderColor="blue.400"
       alignItems="center"
       justifyContent="center"
       position="relative"
@@ -26,7 +26,7 @@ export function PhotoPicker() {
 
       <Pressable
         size={10}
-        bg="blueLight"
+        bg="blue.400"
         rounded="full"
         position="absolute"
         bottom={-4}
