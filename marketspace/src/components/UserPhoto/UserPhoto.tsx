@@ -2,7 +2,7 @@ import { Box, HStack, IImageProps, Image, Text } from 'native-base'
 
 type UserPhotoProps = IImageProps & {
   size: number
-  label: string
+  label?: string
   name?: string
 }
 
@@ -19,11 +19,13 @@ export function UserPhoto({ size, label, name, ...rest }: UserPhotoProps) {
         {...rest}
       />
 
-      <Box>
-        <Text>{label}</Text>
+      {label && (
+        <Box>
+          <Text>{label}</Text>
 
-        <Text bold>{name}</Text>
-      </Box>
+          <Text bold>{name}</Text>
+        </Box>
+      )}
     </HStack>
   )
 }

@@ -1,20 +1,28 @@
-import { HStack, ScrollView, Text, View, useTheme } from 'native-base'
-import { HomeHeader } from './components/HomeHeader'
+import { Pressable } from 'react-native'
+import { HStack, Text, View, useTheme, FlatList, VStack } from 'native-base'
+import { MagnifyingGlass, Sliders } from 'phosphor-react-native'
+
 import { AdsInfo } from './components/AdsInfo'
 import { Input } from '@/components/Input/Input'
-import { MagnifyingGlass, Sliders } from 'phosphor-react-native'
-import { Pressable } from 'react-native'
+import { AdCard } from '@/components/AdCard/AdCard'
+import { HomeHeader } from './components/HomeHeader'
 
 export function Home() {
   const { colors } = useTheme()
 
+  const data = [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+    { id: '4' },
+    { id: '5' },
+    { id: '6' },
+    { id: '7' },
+    { id: '8' },
+  ]
+
   return (
-    <ScrollView
-      flexGrow={1}
-      showsVerticalScrollIndicator={false}
-      px={6}
-      pt={16}
-    >
+    <VStack px={6} pt={16} flex={1}>
       <HomeHeader />
 
       <Text color="gray.300" fontSize="sm" mt={8}>
@@ -41,6 +49,15 @@ export function Home() {
           </HStack>
         }
       />
-    </ScrollView>
+
+      <FlatList
+        data={data}
+        numColumns={2}
+        columnWrapperStyle={{ gap: 20 }}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <AdCard key={`item=${item.id}`} />}
+        _contentContainerStyle={{ paddingBottom: 20 }}
+      />
+    </VStack>
   )
 }

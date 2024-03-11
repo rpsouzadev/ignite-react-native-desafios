@@ -11,7 +11,7 @@ export function HomeHeader() {
   const { navigate } = useNavigation<AppNavigatorRoutesProps>()
 
   return (
-    <HStack space={10} justifyContent="space-between">
+    <HStack justifyContent="space-between">
       <UserPhoto
         size={12}
         name="Rafael"

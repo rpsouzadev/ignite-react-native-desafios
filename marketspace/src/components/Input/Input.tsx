@@ -8,7 +8,7 @@ export function Input({ errorMessage = null, isInvalid, ...rest }: InputProps) {
   const invalid = !!errorMessage || isInvalid
 
   return (
-    <FormControl w="full" isInvalid={invalid} mb={4} flex={1}>
+    <FormControl w="full" isInvalid={invalid} mb={4}>
       <NativeBeseInput
         bg="gray.700"
         minH={45}
