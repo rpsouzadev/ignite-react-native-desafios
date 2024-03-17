@@ -24,9 +24,8 @@ export const THEME = extendTheme({
     heading: 'Karla_700Bold',
     body: 'Karla_400Regular',
   },
-  sizes: {
-    26: 100,
-    36: 153,
+  space: {
+    61: 244,
   },
   fontSizes: {
     xs: 12,
