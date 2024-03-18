@@ -7,6 +7,7 @@ export const THEME = extendTheme({
       500: '#364D9D',
       400: '#647AC7',
     },
+    checked: '#647AC7',
 
     redLight: '#EE7979',
 
