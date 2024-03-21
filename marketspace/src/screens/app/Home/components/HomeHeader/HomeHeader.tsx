@@ -15,6 +15,7 @@ export function HomeHeader() {
       <UserPhoto
         size={12}
         name="Rafael"
+        fontSize={'md'}
         label="Boas vindas,"
         source={{ uri: 'https://github.com/rpsouzadev.png' }}
       />

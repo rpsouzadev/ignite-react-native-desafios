@@ -2,11 +2,18 @@ import { Box, HStack, IImageProps, Image, Text } from 'native-base'
 
 type UserPhotoProps = IImageProps & {
   size: number
+  fontSize?: string
   label?: string
   name?: string
 }
 
-export function UserPhoto({ size, label, name, ...rest }: UserPhotoProps) {
+export function UserPhoto({
+  size,
+  label,
+  name,
+  fontSize,
+  ...rest
+}: UserPhotoProps) {
   return (
     <HStack alignItems="center" space={2.5}>
       <Image
@@ -21,9 +28,13 @@ export function UserPhoto({ size, label, name, ...rest }: UserPhotoProps) {
 
       {label && (
         <Box>
-          <Text>{label}</Text>
+          <Text fontSize={fontSize}>{label}</Text>
 
-          <Text bold>{name}</Text>
+          {name && (
+            <Text bold fontSize={fontSize}>
+              {name}
+            </Text>
+          )}
         </Box>
       )}
     </HStack>
