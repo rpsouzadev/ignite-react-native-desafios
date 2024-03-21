@@ -28,6 +28,10 @@ export const THEME = extendTheme({
   space: {
     61: 244,
   },
+  sizes: {
+    26: 100,
+    36: 153,
+  },
   fontSizes: {
     xs: 12,
     sm: 14,

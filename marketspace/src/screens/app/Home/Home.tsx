@@ -7,9 +7,12 @@ import { AdCard } from '@/components/AdCard/AdCard'
 import { AdsInfo } from '@/screens/app/Home/components/AdsInfo/AdsInfo'
 import { HomeHeader } from '@/screens/app/Home/components/HomeHeader/HomeHeader'
 import { FilterSearch } from '@/screens/app/Home/components/FilterSearch/FilterSearch'
+import { useHome } from './useHome'
 
 export function Home() {
   const { colors } = useTheme()
+
+  const { handleOpenAdDetails } = useHome()
 
   const data = [
     { id: '1' },
@@ -51,15 +54,17 @@ export function Home() {
         }
       />
 
-      {/* <FlatList
+      <FlatList
         data={data}
         numColumns={2}
         columnWrapperStyle={{ gap: 20 }}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <AdCard key={`item=${item.id}`} />}
+        renderItem={({ item }) => (
+          <AdCard key={`item=${item.id}`} openAd={handleOpenAdDetails} />
+        )}
         showsVerticalScrollIndicator={false}
         _contentContainerStyle={{ paddingBottom: 20 }}
-      /> */}
+      />
 
       <FilterSearch />
     </VStack>

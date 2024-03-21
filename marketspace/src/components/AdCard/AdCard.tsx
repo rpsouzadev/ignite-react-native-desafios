@@ -1,10 +1,14 @@
-import { Box, Image, Text, Pressable } from 'native-base'
 import Shoes from '@/assets/ad.png'
+import { Box, Image, Text, Pressable } from 'native-base'
 import { UserPhoto } from '@/components/UserPhoto/UserPhoto'
 
-export function AdCard() {
+type AdCardProps = {
+  openAd: () => void
+}
+
+export function AdCard({ openAd }: AdCardProps) {
   return (
-    <Pressable mb={6} flex={1} position="relative">
+    <Pressable mb={6} flex={1} position="relative" onPress={openAd}>
       <Box>
         <Image w="full" h={26} alt="" rounded={6} source={Shoes} />
 
